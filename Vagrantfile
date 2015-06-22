@@ -16,6 +16,7 @@ Vagrant.configure("2") do |config|
 	config.vm.define 'fabioschicken.dev' do |node|
 		node.vm.hostname = 'fabioschicken.dev'
 		node.vm.network :private_network, ip: '192.168.42.43'
+		node.hostmanager.aliases = 'www.fabioschicken.dev'
 	end
 
 	# allows running commands globally in shell for installed composer libraries
