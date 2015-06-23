@@ -1,7 +1,8 @@
 class nodejs::install {
 	package {[
 		'nodejs',
-		'npm'
+		'npm',
+		'nodejs-legacy'
 	]:
 		ensure => installed,
 	}

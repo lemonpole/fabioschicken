@@ -1,0 +1,31 @@
+{
+	"name": "fabioschicken-app",
+	"author": "Steve Rivera",
+	"version": "0.0.1",
+	"description": "Fabio's Chicken restaurant website.",
+	"repository": "https://github.com/lemonpole/fabioschicken",
+	"main": "js/app.js",
+	"dependencies": {
+		"flux": "^2.0.1",
+		"keymirror": "~0.1.0",
+		"react": "^0.12.0"
+	},
+	"devDependencies": {
+		"browserify": "^10.0.0",
+		"envify": "^3.0.0",
+		"reactify": "^1.0.0",
+		"uglify-js": "~2.4.15",
+		"watchify": "^3.0.0",
+		"less": "^2.5.1"
+	},
+	"scripts": {
+		"start": "watchify js/app.js -o js/bundle.js -v --poll",
+		"build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js"
+	},
+	"browserify": {
+		"transform": [
+			"reactify",
+			"envify"
+		]
+	}
+}
