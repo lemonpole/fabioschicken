@@ -1,8 +1,8 @@
 # ignore vagrant setup files and misc.
 .vagrant/
-.gitignore.swp
 Thumbs.db
-node_modules/
+*.log
+*.swp
 
 # ignore everything under the wordpress directory EXCEPT wp_content
 # under the wp_content directory, ignore specified plugins and themes
