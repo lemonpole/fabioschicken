@@ -8,7 +8,8 @@
 	"dependencies": {
 		"flux": "2.0.1",
 		"keymirror": "0.1.0",
-		"react": "0.12.0"
+		"react": "0.13.0",
+		"react-router": "0.13.0"
 	},
 	"devDependencies": {
 		"grunt": "0.4.5",
