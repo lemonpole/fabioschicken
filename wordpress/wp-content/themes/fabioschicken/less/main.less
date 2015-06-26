@@ -1,2 +1,44 @@
 @import '../node_modules/bootstrap/less/bootstrap.less';
 @import 'variables.less';
+@import 'helpers.less';
+
+#splash-container {
+	position:relative;
+	background-image:url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-21827.jpg);
+	background-size:cover;
+	background-position:50% 0px;
+	background-repeat:no-repeat;
+
+	.text {
+		position:absolute; top:50%;
+		height:@splash-text-height; width:100%;
+		margin-top:-(@splash-text-height/2);
+		text-align:center; color:white;
+		
+		h1, h2 { text-shadow:0px 0px 20px darken(white, 30%); }
+		h1 {
+			position:relative;
+			margin-top:0; margin-bottom:@mp-large;
+			font-size:5em; font-weight:700;
+			text-transform:uppercase;
+
+			&:after {
+				content:""; position:absolute; bottom:-(@mp-large); left:50%;
+				background-color:white;
+				width:@splash-text-border-width; height:@mp-small;
+				margin-left:-(@splash-text-border-width / 2);
+			}
+		}
+		h2 {
+			margin-top:@mp-large * 2;
+			text-transform:uppercase;
+		}
+
+		@media(max-width:@screen-xxs-max){
+			& {
+				height:@splash-text-height-xxs;
+				margin-top:-(@splash-text-height-xxs / 2);
+			}
+		}
+	}
+}

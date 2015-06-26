@@ -1,9 +1,12 @@
 var React = require('react');
+var Splash = require('./Splash.react.js');
 
 var Home = React.createClass({
 	render: function(){
 		return(
-			<h1>Hello, world...</h1>
+			<div>
+				<Splash />
+			</div>
 		);
 	}
 });
