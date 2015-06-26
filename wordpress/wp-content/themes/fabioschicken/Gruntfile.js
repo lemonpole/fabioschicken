@@ -26,10 +26,15 @@ module.exports = function(grunt){
 				}
 			}
 		},
+		autoPrefixer: {
+			develop: {
+				src: './bundle.css'
+			}
+		},
 		watch: {
 			less: {
 				files: ["./less/**/*"],
-				tasks: ["less:develop"]
+				tasks: ["less:develop", "autoPrefixer:develop"]
 			},
 			js: {
 				files: ["./js/**/*"],
@@ -41,6 +46,7 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-browserify');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-autoprefixer');
 
 	grunt.registerTask('start', ['less:develop','browserify:develop','watch']);
 }
