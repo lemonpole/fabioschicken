@@ -1,0 +1,26 @@
+{
+	"name": "fabioschicken-app",
+	"author": "Steve Rivera",
+	"version": "0.0.1",
+	"description": "Fabio's Chicken restaurant website.",
+	"repository": "https://github.com/lemonpole/fabioschicken",
+	"main": "js/app.js",
+	"dependencies": {
+		"flux": "2.0.1",
+		"keymirror": "0.1.0",
+		"react": "0.13.0",
+		"page": "1.6.3"
+	},
+	"devDependencies": {
+		"grunt": "0.4.5",
+		"grunt-browserify": "3.8.0",
+		"grunt-contrib-less": "1.0.0",
+		"grunt-contrib-watch": "0.6.0",
+		"grunt-autoprefixer": "~3.0.0",
+		"reactify": "1.0.0",
+		"bootstrap": "3.3.5"
+	},
+	"scripts": {
+		"start": "node -e \"require('grunt').tasks(['start']);\""
+	}
+}

@@ -15,3 +15,4 @@ class { 'wordpress::install': }
 class { 'phpmyadmin::install': }
 #class { 'composer::install': }
 #class { 'phpqa::install': }
+class { 'nodejs::install': }
