@@ -1,7 +1,12 @@
 var React = require('react');
-var App = require('./components/App.react');
+var Router = require('./components/Router.react');
+var Main = require('./components/Main.react');
+
+var Routes = [
+	["/", Main]
+];
 
 React.render(
-	<App />,
+	<Router routes={Routes} />,
 	document.getElementById('app')
 );

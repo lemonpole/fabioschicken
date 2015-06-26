@@ -9,7 +9,7 @@
 		"flux": "2.0.1",
 		"keymirror": "0.1.0",
 		"react": "0.13.0",
-		"react-router": "0.13.0"
+		"page": "1.6.3"
 	},
 	"devDependencies": {
 		"grunt": "0.4.5",
