@@ -27,9 +27,13 @@ module.exports = function(grunt){
 			}
 		},
 		watch: {
-			develop: {
-				files: ["./less/**/*", "./js/**/*"],
-				tasks: ["less:develop", "browserify:develop"]
+			less: {
+				files: ["./less/**/*"],
+				tasks: ["less:develop"]
+			},
+			js: {
+				files: ["./js/**/*"],
+				tasks: ["browserify:develop"]
 			}
 		}
 	});
@@ -38,5 +42,5 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('start', ['less:develop','browserify:develop','watch:develop']);
+	grunt.registerTask('start', ['less:develop','browserify:develop','watch']);
 }
