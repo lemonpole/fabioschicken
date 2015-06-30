@@ -42,3 +42,27 @@
 		}
 	}
 }
+
+nav {
+	width:100%; height:@nav-height;
+
+	&.fixed { position:fixed; top:0; }
+	&.relative { position:relative; }
+	ul {
+		list-style-type:none;
+		height:inherit;
+		margin:0; padding:0;
+		text-align:center;
+
+		li {
+			display:inline-table;
+			height:inherit;
+			padding:0 @mp-medium;
+
+			& > a {
+				display:table-cell;
+				vertical-align:middle;
+			}
+		}
+	}
+}

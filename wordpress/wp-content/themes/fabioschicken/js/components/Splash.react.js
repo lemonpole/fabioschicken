@@ -11,6 +11,7 @@ var Splash = React.createClass({
 		return getSplashState();
 	},
 	componentDidMount: function(){
+		this._handleResize();
 		window.addEventListener('resize', this._handleResize);
 	},
     	componentWillUnmount: function(){
@@ -18,7 +19,7 @@ var Splash = React.createClass({
 	},
 	render: function(){
 		return(
-			<div className="conainer-fluid" id="splash-container" style={{height: this.state.winHeight + 'px'}}>
+			<div id="splash-container" style={{height: this.state.winHeight + 'px'}}>
 				<div className="text">
 					<h1>Fabios Chicken</h1>
 					<h2>4805 North Front Street</h2>
@@ -28,7 +29,8 @@ var Splash = React.createClass({
 	},
 
 	_handleResize: function(e){
-		this.setState(getSplashState());
+		var navHeight = document.getElementById('nav-container').offsetHeight;
+		this.setState({ winHeight: window.innerHeight - navHeight });
 	}
 });
 
