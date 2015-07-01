@@ -21,8 +21,8 @@ var Splash = React.createClass({
 		return(
 			<div id="splash-container" style={{height: this.state.winHeight + 'px'}}>
 				<div className="text">
-					<h1>Fabios Chicken</h1>
-					<h2>4805 North Front Street</h2>
+					<h1>React JS Example</h1>
+					<h2>Woah, nelly! A subtitle goes here!</h2>
 				</div>
 			</div>
 		);
@@ -30,6 +30,7 @@ var Splash = React.createClass({
 
 	_handleResize: function(e){
 		var navHeight = document.getElementById('nav-container').offsetHeight;
+		navHeight = (navHeight == window.innerHeight)? 0: navHeight; // for mobile
 		this.setState({ winHeight: window.innerHeight - navHeight });
 	}
 });

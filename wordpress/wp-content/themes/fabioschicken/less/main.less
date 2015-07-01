@@ -44,10 +44,11 @@
 }
 
 nav {
+	background-color:@nav-bg;
 	width:100%; height:@nav-height;
-
-	&.fixed { position:fixed; top:0; }
-	&.relative { position:relative; }
+	
+	&.yes-fixed { position:fixed; top:0; }
+	&.no-fixed { position:relative; }
 	ul {
 		list-style-type:none;
 		height:inherit;
@@ -64,5 +65,76 @@ nav {
 				vertical-align:middle;
 			}
 		}
+	}
+
+	@media(max-width:@screen-xs-max){
+		&, &.yes-fixed, &.no-fixed { position:fixed; }
+		& {
+			top:0; z-index:9;
+			background-color:@nav-bg;
+			height:100%; opacity:0;
+			transition:opacity 0.3s;
+
+			ul {
+				position:relative; top:50%;
+				transform:translateY(-50%);
+				height:auto;
+
+				li {
+					display:block;
+					width:100%; height:@nav-height;
+
+					& > a {
+						display:block; text-align:center;
+						height:inherit;
+					}
+				}
+			}
+		}
+	}
+}
+
+/* credit: http://callmenick.com/post/animating-css-only-hamburger-menu-icons */
+#mobile-nav-container {
+	position:fixed; z-index:10;
+	width:100%; height:@nav-height;
+	transition:background-color 0.3s;
+	display:none;
+
+	&.yes-bg { background-color:fade(@nav-bg, 100%); }
+	&.no-bg { background-color:fadeOut(@nav-bg, 100%); }
+	#toggle-btn {
+		position:fixed; z-index:10;
+		top:@mp-medium * 2; left:@mp-large;
+
+		& > span, & > span:before, & > span:after {
+			position:absolute; display:block; content:"";
+			background-color:black;
+			width:35px; height:5px;
+			border-radius:1px; cursor:pointer;
+		}
+		& > span { transition:background 0s 0.3s; }
+		& > span:before, & > span:after {
+			transition-duration:0.3s, 0.3s;
+			transition-delay:0.3s, 0s;
+		}
+		& > span:before {
+			top:-10px;
+			transition-property:top, transform;
+		}
+		& > span:after {
+			bottom:-10px;
+			transition-property:bottom, transform;
+		}
+		&.active span {
+			background-color:transparent;
+			
+			&:before, &:after { transition-delay:0s, 0.3s; }
+			&:before { top:0; transform:rotate(45deg); }
+			&:after { bottom:0; transform:rotate(-45deg); }
+		}
+	}
+	@media(max-width:@screen-xs-max){
+		display:block;
 	}
 }

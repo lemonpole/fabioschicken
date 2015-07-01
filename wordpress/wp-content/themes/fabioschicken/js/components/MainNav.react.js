@@ -3,7 +3,7 @@ var React = require('react');
 function getMainNavState(){
 	return({
 		scrollPos: document.documentElement.scrollTop || document.body.scrollTop,
-		currentClass: 'relative',
+		fixed: false,
 		items: ['Home', 'Services', 'About', 'Contact Us']
 	});
 }
@@ -19,8 +19,9 @@ var MainNav = React.createClass({
 		window.removeEventListener('scroll', this._handleScroll);
 	},
 	render: function(){
+		var text = (this.state.fixed)? 'yes-fixed': 'no-fixed';
 		return(
-			<nav className={this.state.currentClass} id="nav-container">
+			<nav className={text} id="nav-container">
 				<ul>{this.state.items.map(function(m, index){
 					return <li><a href="#">{m}</a></li>
 				})}</ul>
@@ -32,8 +33,8 @@ var MainNav = React.createClass({
 		var currentScrollPos = getMainNavState().scrollPos;
 		var triggerPos = document.getElementById('splash-container').offsetHeight;
 
-		if(currentScrollPos >= triggerPos) this.setState({ currentClass: 'fixed' });
-		else this.setState({ currentClass: 'relative' });
+		if(currentScrollPos >= triggerPos) this.setState({ fixed: true });
+		else this.setState({ fixed: false });
 	}
 });
 
