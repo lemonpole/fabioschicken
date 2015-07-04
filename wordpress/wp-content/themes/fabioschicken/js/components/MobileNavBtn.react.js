@@ -22,9 +22,9 @@ var MobileNavBtn = React.createClass({
 		var shown = this.state.showBar? 'yes-bg': 'no-bg';
 		var text = this.state.active? 'active': '';
 		return(
-			<div id="mobile-nav-container" className={shown}>
-				<div id="toggle-btn" className={text} onClick={this._handleClick}><span></span></div>
-			</div>
+			<button id="mobile-nav-container" className={shown + " " + text} onClick={this._handleClick}>
+				<span>toggle menu</span>
+			</button>
 		);
 	},
 

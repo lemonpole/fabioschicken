@@ -96,42 +96,57 @@ nav {
 
 /* credit: http://callmenick.com/post/animating-css-only-hamburger-menu-icons */
 #mobile-nav-container {
-	position:fixed; z-index:10;
-	width:100%; height:@nav-height;
-	transition:background-color 0.3s;
-	display:none;
-
+	position:fixed; display:none; z-index:10;
+	width:100%; height:@nav-height-mobile;
+	margin:0; padding:0;
+	box-shadow:none; border:none;
+	text-indent:-999px; overflow:hidden;
+	cursor:pointer;
+	transition:background 0.3s;
+	
+	&:focus { outline:none; }
 	&.yes-bg { background-color:fade(@nav-bg, 100%); }
 	&.no-bg { background-color:fadeOut(@nav-bg, 100%); }
-	#toggle-btn {
-		position:fixed; z-index:10;
-		top:@mp-medium * 2; left:@mp-large;
+	span {
+		position:absolute; display:block;
+		top:50%; left:@mp-medium * 2; transform:translateY(-50%);
+		width:@burger-bar-width; height:@burger-bar-height;
+		background:white;
+		transition:background 0s 0.3s;
 
-		& > span, & > span:before, & > span:after {
-			position:absolute; display:block; content:"";
-			background-color:black;
-			width:35px; height:5px;
-			border-radius:1px; cursor:pointer;
-		}
-		& > span { transition:background 0s 0.3s; }
-		& > span:before, & > span:after {
+		&:before, &:after {
+			position:absolute; left:0; display:block; content:"";
+			background-color:white;
+			width:100%; height:@mp-small;
 			transition-duration:0.3s, 0.3s;
 			transition-delay:0.3s, 0s;
 		}
-		& > span:before {
-			top:-10px;
+		&:before {
+			top:@burger-bar-padding;
 			transition-property:top, transform;
 		}
-		& > span:after {
-			bottom:-10px;
+		&:after {
+			bottom:@burger-bar-padding;
 			transition-property:bottom, transform;
 		}
-		&.active span {
-			background-color:transparent;
-			
-			&:before, &:after { transition-delay:0s, 0.3s; }
-			&:before { top:0; transform:rotate(45deg); }
-			&:after { bottom:0; transform:rotate(-45deg); }
+	}
+	&.active {
+		background-color:@nav-bg;
+
+		span {
+			background:none;
+
+			&:before, &:after {
+				transition-delay:0s, 0.3s;
+			}
+			&:before {
+				top:0;
+				transform:rotate(45deg);
+			}
+			&:after {
+				bottom:0;
+				transform:rotate(-45deg);
+			}
 		}
 	}
 	@media(max-width:@screen-xs-max){
