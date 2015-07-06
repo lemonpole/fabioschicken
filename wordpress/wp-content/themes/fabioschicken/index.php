@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Fabio's Chicken Restaurant</title>
+		<title><?php bloginfo('name'); ?></title>
 
 		<link rel="stylesheet" href="<?php echo $root_path; ?>/bundle.css" />
 	</head>

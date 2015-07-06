@@ -8,6 +8,12 @@ var WebAPIActionCreators = {
 			type: ActionTypes.RECEIVE_BLOGINFO,
 			data: data
 		});
+	},
+	receivePrimaryNav: function(data){
+		AppDispatcher.dispatch({
+			type: ActionTypes.RECEIVE_PRIMARYNAV,
+			data: data
+		});
 	}
 };
 

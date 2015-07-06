@@ -5,7 +5,8 @@ module.exports = {
 		ROOT_PATH: '/'
 	},
 	ActionTypes: keyMirror({
-		RECEIVE_BLOGINFO: null
+		RECEIVE_BLOGINFO: null,
+		RECEIVE_PRIMARYNAV: null,
 	}),
 	WebAPI: {
 		API_ROOT: 'http://fabioschicken.dev/wp-admin/admin-ajax.php?action='

@@ -1,10 +1,12 @@
 var React = require('react');
+var WebAPIUtils = require('../utils/WebAPIUtils');
+var PrimaryNavStore = require('../stores/PrimaryNavStore');
 
 function getMainNavState(){
 	return({
 		scrollPos: document.documentElement.scrollTop || document.body.scrollTop,
 		fixed: false,
-		items: ['Home', 'Services', 'About', 'Contact Us']
+		navData: PrimaryNavStore.get()
 	});
 }
 
@@ -13,19 +15,18 @@ var MainNav = React.createClass({
 		return getMainNavState();
 	},
     	componentDidMount: function(){
+		WebAPIUtils.getPrimaryNav();
 		window.addEventListener('scroll', this._handleScroll);
+		PrimaryNavStore.addChangeListener(this._onChange);
 	},
 	componentWillUnmount: function(){
 		window.removeEventListener('scroll', this._handleScroll);
+		PrimaryNavStore.addChangeListener(this._onChange);
 	},
 	render: function(){
 		var text = (this.state.fixed)? 'yes-fixed': 'no-fixed';
 		return(
-			<nav className={text} id="nav-container">
-				<ul>{this.state.items.map(function(m, index){
-					return <li><a href="#">{m}</a></li>
-				})}</ul>
-			</nav>
+			<nav className={text} id="nav-container" dangerouslySetInnerHTML={{__html: this.state.navData}} />
 		);
 	},
 
@@ -35,6 +36,9 @@ var MainNav = React.createClass({
 
 		if(currentScrollPos >= triggerPos) this.setState({ fixed: true });
 		else this.setState({ fixed: false });
+	},
+	_onChange: function(){
+		this.setState(getMainNavState());
 	}
 });
 
