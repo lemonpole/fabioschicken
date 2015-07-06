@@ -1,9 +1,10 @@
 var React = require('react');
 var BlogInfoStore = require('../stores/BlogInfoStore');
+var WebAPIUtils = require('../utils/WebAPIUtils');
 
 function getSplashState(){
 	return {
-		bloginfo: BlogInfoStore.get(),
+		blogInfoData: BlogInfoStore.get(),
 		winHeight: window.innerHeight
 	};
 }
@@ -13,6 +14,7 @@ var Splash = React.createClass({
 		return getSplashState();
 	},
 	componentDidMount: function(){
+		WebAPIUtils.getBlogInfo();
 		this._handleResize();
 		window.addEventListener('resize', this._handleResize);
 		BlogInfoStore.addChangeListener(this._onChange);
@@ -25,8 +27,8 @@ var Splash = React.createClass({
 		return(
 			<div id="splash-container" style={{height: this.state.winHeight + 'px'}}>
 				<div className="text">
-					<h1>{this.state.bloginfo.name}</h1>
-					<h2>{this.state.bloginfo.description}</h2>
+					<h1>{this.state.blogInfoData.name}</h1>
+					<h2>{this.state.blogInfoData.description}</h2>
 				</div>
 			</div>
 		);

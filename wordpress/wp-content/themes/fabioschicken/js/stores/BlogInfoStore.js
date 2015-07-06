@@ -1,10 +1,11 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher.js');
-var ActionTypeConstants = require('../constants/ActionTypeConstants.js');
+var AppConstants = require('../constants/AppConstants');
 var EventEmitter = require('events').EventEmitter;
 var Assign = require('object-assign');
 
+var ActionTypes = AppConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
-var _bloginfo = {};
+var _blogInfoData = {};
 
 var BlogInfoStore = Assign({}, EventEmitter.prototype, {
 	emitChange: function(){
@@ -17,14 +18,14 @@ var BlogInfoStore = Assign({}, EventEmitter.prototype, {
 		this.removeListener(CHANGE_EVENT, callback);
 	},
 	get: function(){
-		return _bloginfo;
+		return _blogInfoData;
 	}
 });
 
 BlogInfoStore.dispatchToken = AppDispatcher.register(function(action){
 	switch(action.type){
-		case ActionTypeConstants.RECEIVE_BLOGINFO:
-			_bloginfo = action.data;
+		case ActionTypes.RECEIVE_BLOGINFO:
+			_blogInfoData = action.data;
 			BlogInfoStore.emitChange();
 			break;
 		default:

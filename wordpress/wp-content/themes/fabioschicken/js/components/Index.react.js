@@ -1,10 +1,11 @@
 var React = require('react');
 var Router = require('./Router.react');
-var RouterConstants = require('../constants/RouterConstants');
 var Home = require('./Home.react');
+var AppConstants = require('../constants/AppConstants');
 
+var RoutePaths = AppConstants.RoutePaths;
 var Routes = [
-	[RouterConstants.ROOT_PATH, Home]
+	[RoutePaths.ROOT_PATH, Home]
 ];
 
 var Index = React.createClass({
