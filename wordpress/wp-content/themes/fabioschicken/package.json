@@ -9,7 +9,9 @@
 		"flux": "2.0.1",
 		"keymirror": "0.1.0",
 		"react": "0.13.0",
-		"page": "1.6.3"
+		"page": "1.6.3",
+		"superagent": "1.2.0",
+		"object-assign":"1.0.0"
 	},
 	"devDependencies": {
 		"grunt": "0.4.5",

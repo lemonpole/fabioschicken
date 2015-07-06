@@ -1,7 +1,9 @@
 var React = require('react');
+var BlogInfoStore = require('../stores/BlogInfoStore');
 
 function getSplashState(){
 	return {
+		bloginfo: BlogInfoStore.get(),
 		winHeight: window.innerHeight
 	};
 }
@@ -13,16 +15,18 @@ var Splash = React.createClass({
 	componentDidMount: function(){
 		this._handleResize();
 		window.addEventListener('resize', this._handleResize);
+		BlogInfoStore.addChangeListener(this._onChange);
 	},
     	componentWillUnmount: function(){
 		window.removeEventListener('resize', this._handleResize);
+		BlogInfoStore.removeChangeListener(this._onChange);
 	},
 	render: function(){
 		return(
 			<div id="splash-container" style={{height: this.state.winHeight + 'px'}}>
 				<div className="text">
-					<h1>React JS Example</h1>
-					<h2>Woah, nelly! A subtitle goes here!</h2>
+					<h1>{this.state.bloginfo.name}</h1>
+					<h2>{this.state.bloginfo.description}</h2>
 				</div>
 			</div>
 		);
@@ -32,6 +36,9 @@ var Splash = React.createClass({
 		var navHeight = document.getElementById('nav-container').offsetHeight;
 		navHeight = (navHeight == window.innerHeight)? 0: navHeight; // for mobile
 		this.setState({ winHeight: window.innerHeight - navHeight });
+	},
+	_onChange: function(){
+		this.setState(getSplashState());
 	}
 });
 
