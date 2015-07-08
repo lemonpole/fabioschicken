@@ -1,4 +1,5 @@
 @import '../node_modules/bootstrap/less/bootstrap.less';
+@import '../node_modules/font-awesome/less/font-awesome.less';
 @import 'variables.less';
 @import 'helpers.less';
 
@@ -15,6 +16,9 @@
 		margin-top:-(@splash-text-height/2);
 		text-align:center; color:white;
 		
+		&.loading {
+			height:50px; margin-top:-25px;
+		}
 		h1, h2 { text-shadow:0px 0px 20px darken(white, 30%); }
 		h1 {
 			position:relative;
@@ -131,7 +135,7 @@ nav {
 		}
 	}
 	&.active {
-		background-color:@nav-bg;
+		background-color:#cb0032;
 
 		span {
 			background:none;

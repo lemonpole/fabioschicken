@@ -20,7 +20,8 @@
 		"grunt-contrib-watch": "0.6.0",
 		"grunt-autoprefixer": "~3.0.0",
 		"reactify": "1.0.0",
-		"bootstrap": "3.3.5"
+		"bootstrap": "3.3.5",
+		"font-awesome": "4.3.0"
 	},
 	"scripts": {
 		"start": "node -e \"require('grunt').tasks(['start']);\""

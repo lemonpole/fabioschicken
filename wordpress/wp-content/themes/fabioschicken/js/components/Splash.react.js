@@ -2,10 +2,12 @@ var React = require('react');
 var BlogInfoStore = require('../stores/BlogInfoStore');
 var WebAPIUtils = require('../utils/WebAPIUtils');
 
+var _isLoaded = false;
+
 function getSplashState(){
 	return {
 		blogInfoData: BlogInfoStore.get(),
-		winHeight: window.innerHeight
+		winHeight: window.innerHeight,
 	};
 }
 
@@ -14,8 +16,8 @@ var Splash = React.createClass({
 		return getSplashState();
 	},
 	componentDidMount: function(){
-		WebAPIUtils.getBlogInfo();
 		this._handleResize();
+		WebAPIUtils.getBlogInfo();
 		window.addEventListener('resize', this._handleResize);
 		BlogInfoStore.addChangeListener(this._onChange);
 	},
@@ -24,12 +26,13 @@ var Splash = React.createClass({
 		BlogInfoStore.removeChangeListener(this._onChange);
 	},
 	render: function(){
+		var elem;
+		if(!_isLoaded) elem = <BeforeLoad />;
+		else elem = <AfterLoad data={this.state.blogInfoData} />;
+
 		return(
 			<div id="splash-container" style={{height: this.state.winHeight + 'px'}}>
-				<div className="text">
-					<h1>{this.state.blogInfoData.name}</h1>
-					<h2>{this.state.blogInfoData.description}</h2>
-				</div>
+				{elem}
 			</div>
 		);
 	},
@@ -40,7 +43,28 @@ var Splash = React.createClass({
 		this.setState({ winHeight: window.innerHeight - navHeight });
 	},
 	_onChange: function(){
-		this.setState(getSplashState());
+		_isLoaded = true;
+		this.setState({ blogInfoData: BlogInfoStore.get() });
+	}
+});
+
+var BeforeLoad = React.createClass({
+	render: function(){
+		return(
+			<div className="text loading">
+				<i className="fa fa-spinner fa-pulse fa-4x"></i>
+			</div>
+		);
+	}
+});
+var AfterLoad = React.createClass({
+	render: function(){
+		return(
+			<div className="text">
+				<h1>{this.props.data.name}</h1>
+				<h2>{this.props.data.description}</h2>
+			</div>
+		);
 	}
 });
 
