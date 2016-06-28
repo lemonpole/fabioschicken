@@ -1,5 +1,6 @@
-# ignore vagrant setup files and misc.
-.vagrant/
 Thumbs.db
 *.log
 *.swp
+
+node_modules/
+dist/
