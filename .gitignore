@@ -1,6 +1,16 @@
+# app
+/dist
+
+# node/npm
+/node_modules
+npm-debug.log
+
+# mac
+.DS_Store
+**/.DS_Store
+
+# misc
+.env
 Thumbs.db
 *.log
 *.swp
-
-node_modules/
-dist/

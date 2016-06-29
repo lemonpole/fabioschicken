@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "",
-    "build": "webpack --progress --colors --config webpack-dev.config.js"
+    "build": "webpack --progress --colors --config webpack-dev.js"
   },
   "dependencies": {
     "babel-polyfill": "^6.9.1",
