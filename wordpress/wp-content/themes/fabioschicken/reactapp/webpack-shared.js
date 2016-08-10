@@ -7,6 +7,13 @@ exports.loaders = {
       plugins: [ 'transform-runtime' ],
       presets: [ 'es2015', 'react' ]
     }
+  },
+  styles: {
+    flexboxgrid: {
+      test: /\.css$/,
+      loader: 'style!css?modules',
+      include: /flexboxgrid/
+    }
   }
 };
 
