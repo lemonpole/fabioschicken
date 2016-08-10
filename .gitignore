@@ -1,8 +1,5 @@
-# app
-/dist
-
 # node/npm
-/node_modules
+node_modules/
 npm-debug.log
 
 # mac
@@ -10,7 +7,23 @@ npm-debug.log
 **/.DS_Store
 
 # misc
-.env
 Thumbs.db
 *.log
 *.swp
+
+# ignore the mysqldata directory for now. sadly we will have to do a manual
+# import of the database for now
+mysqldata/*
+
+# ignore everything under the wordpress directory EXCEPT wp_content
+# under the wp_content directory, ignore specified plugins and themes
+wordpress/*
+!wordpress/wp-content/
+wordpress/wp-content/*
+!wordpress/wp-content/plugins/
+wordpress/wp-content/plugins/akismet/
+wordpress/wp-content/plugins/hello.php
+wordpress/wp-content/plugins/index.php
+!wordpress/wp-content/themes/
+wordpress/wp-content/themes/index.php
+wordpress/wp-content/themes/twenty*/

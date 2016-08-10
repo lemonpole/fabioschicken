@@ -5,7 +5,8 @@
   "author": "Steve Rivera",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --progress --colors --config webpack-dev.js",
+    "start": "webpack-dev-server --colors --inline --hot --config webpack-dev.js",
+    "build": "webpack --colors --config webpack-dev.js",
     "lint": "eslint --ext .js,.jsx src",
     "clean": "rm -rf dist"
   },
@@ -29,6 +30,8 @@
     "eslint-plugin-import": "^1.9.2",
     "eslint-plugin-jsx-a11y": "^1.5.3",
     "eslint-plugin-react": "^5.2.2",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-dev-server": "^1.14.1"
   }
 }
