@@ -1,3 +1,5 @@
+var path = require( 'path' );
+
 exports.loaders = {
   js: {
     test: /\.jsx?$/,
@@ -13,6 +15,16 @@ exports.loaders = {
       test: /\.css$/,
       loader: 'style!css?modules',
       include: /flexboxgrid/
+    },
+    app: {
+      test: /\.scss$/,
+      include: path.join( __dirname, 'app' ),
+      loaders: [
+        'style',
+        'css?modules&localIdentName=[name]__[local]___[hash:base64:5]',
+        'postcss',
+        'sass'
+      ]
     }
   }
 };

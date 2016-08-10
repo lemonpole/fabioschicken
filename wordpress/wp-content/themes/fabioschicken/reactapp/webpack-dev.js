@@ -18,7 +18,8 @@ module.exports = {
     }],
     loaders: [
       webpackConfig.loaders.js,
-      webpackConfig.loaders.styles.flexboxgrid
+      webpackConfig.loaders.styles.flexboxgrid,
+      webpackConfig.loaders.styles.app
     ]
   },
   eslint: {

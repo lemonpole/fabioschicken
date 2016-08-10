@@ -29,8 +29,7 @@
     "react/no-direct-mutation-state": 2,
     "react/no-deprecated": 2,
     "react/sort-comp": [
-      "error",
-      {
+      "error", {
         "order": [
           "props",
           "state",
@@ -66,7 +65,7 @@
       { "args": "none" }
     ],
     "new-cap": 0,
-    "eol-last": 2,
+    "eol-last": 0,
     "jsx-quotes": [ "error", "prefer-double" ],
     "consistent-return": 0,
     "key-spacing": 0,
@@ -84,6 +83,24 @@
     "semi": 2,
     "computed-property-spacing": 2,
     "radix": 0,
-    "space-in-parens": [ "error", "always" ]
+    "space-in-parens": [
+      "error",
+      "always",
+      {
+        "exceptions": [ "{}" ]
+      }
+    ],
+    "spaced-comment": 0,
+    "keyword-spacing": 0,
+    "object-curly-spacing": [
+      "error",
+      "always",
+      {
+        "objectsInObjects": false,
+        "arraysInObjects": false
+      }
+    ],
+    "no-underscore-dangle": 0,
+    "import/no-unresolved": 0
   }
 }
