@@ -7,15 +7,17 @@
   "scripts": {
     "start": "webpack-dev-server --colors --inline --hot --config webpack-dev.js",
     "build": "webpack --colors --config webpack-dev.js",
-    "lint": "eslint --ext .js,.jsx src",
+    "lint": "eslint --ext .js,.jsx app",
     "clean": "rm -rf dist"
   },
   "dependencies": {
     "babel-polyfill": "^6.9.1",
     "babel-runtime": "^6.9.2",
+    "material-ui": "^0.15.3",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
-    "react-flexbox-grid": "^0.10.2"
+    "react-flexbox-grid": "^0.10.2",
+    "react-tap-event-plugin": "^1.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.10.4",
