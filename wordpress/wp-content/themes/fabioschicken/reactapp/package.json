@@ -5,8 +5,8 @@
   "author": "Steve Rivera",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --progress --colors --inline --hot --config webpack-dev.js",
-    "build": "webpack --progress --colors --config webpack-dev.js",
+    "start": "webpack-dev-server --colors --inline --hot --config webpack-dev.js",
+    "build": "webpack --colors --config webpack-dev.js",
     "lint": "eslint --ext .js,.jsx src",
     "clean": "rm -rf dist"
   },
