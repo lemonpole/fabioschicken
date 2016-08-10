@@ -1,3 +1,5 @@
+<?php $root_path = get_stylesheet_directory_uri(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -5,6 +7,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 	</head>
 	<body>
-		<h1>Fabio's Chicken</h1>
+    <div id="app"></div>
+
+    <script src="<?php echo $root_path; ?>/bundle.js"></script>
 	</body>
 </html>

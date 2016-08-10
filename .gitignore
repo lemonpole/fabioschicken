@@ -11,6 +11,10 @@ Thumbs.db
 *.log
 *.swp
 
+# ignore the mysqldata directory for now. sadly we will have to do a manual
+# import of the database for now
+mysqldata/*
+
 # ignore everything under the wordpress directory EXCEPT wp_content
 # under the wp_content directory, ignore specified plugins and themes
 wordpress/*
