@@ -6,7 +6,7 @@ module.exports = {
     './app'
   ],
   output: {
-    path: './dist',
+    path: '../',
     filename: 'bundle.js'
   },
   resolve: webpackConfig.resolve,
