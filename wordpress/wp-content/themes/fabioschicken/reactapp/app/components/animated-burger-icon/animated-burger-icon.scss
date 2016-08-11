@@ -43,6 +43,7 @@ $icon-height      : ( $bar-height * $num-bars ) + $computed-padding; // height o
     -moz-transition: .25s ease-in-out;
     -o-transition: .25s ease-in-out;
     transition: .25s ease-in-out;
+    box-shadow: 1px 1px 1px rgba( 0, 0, 0, .2 );
   }
 
   #abi-1 span:nth-child(1) {

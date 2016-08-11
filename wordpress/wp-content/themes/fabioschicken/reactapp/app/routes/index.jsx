@@ -6,10 +6,12 @@ import AnimatedBurgerIcon from '../components/animated-burger-icon';
 
 const AppRoot = ( props ) => (
   <div>
-    <AnimatedBurgerIcon barStyles={{ background: '#ff0000', height: '3px' }} /><br />
-    <AnimatedBurgerIcon type="abi-2" /><br />
-    <AnimatedBurgerIcon type="abi-3" /><br />
-    <AnimatedBurgerIcon type="abi-4" />
+    <AnimatedBurgerIcon
+      type="abi-2"
+      containerStyle={{
+        position: 'absolute', top: 20, right: 20
+      }}
+    />
     {props.childen}
   </div>
 );
