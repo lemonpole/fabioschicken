@@ -2,11 +2,11 @@ import React from 'react';
 import { Route } from 'react-router';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
+import AnimatedBurgerIcon from '../components/animated-burger-icon';
 
 const AppRoot = ( props ) => (
   <div>
-    <AppBar title="Fabio's Chicken" />
+    <AnimatedBurgerIcon />
     {props.childen}
   </div>
 );
