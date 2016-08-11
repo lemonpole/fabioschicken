@@ -15,7 +15,8 @@ export default class AnimatedBurgerIcon extends Component {
   }
 
   static defaultProps = {
-    type: 'abi-1'
+    type: 'abi-1',
+    barStyles: {}
   }
 
   handleOnClick = () => {
@@ -27,7 +28,7 @@ export default class AnimatedBurgerIcon extends Component {
     const output = [];
 
     for( let i = 0; i < num; i++ ) {
-      output.push( <span /> );
+      output.push( <span style={this.props.barStyles} /> );
     }
 
     return output;

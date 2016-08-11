@@ -1,9 +1,12 @@
-$num-bars         : 3;
+// TODO: use autofixer and append to webpack:
+// https://github.com/postcss/autoprefixer
+$num-bars         : 3; // this will rarely change... if ever
 $bar-height       : 9px;
 $bar-border-radius: 9px;
 $bar-color        : #d3531a;
 
-$computed-padding : ( $num-bars - 1 ) * $bar-height; // padding between the inside bars
+$padding: 9px; // padding between each bar
+$computed-padding : ( $num-bars - 1 ) * $padding;
 $icon-height      : ( $bar-height * $num-bars ) + $computed-padding; // height of all bars + the computed padding
 
 :global {
@@ -47,11 +50,11 @@ $icon-height      : ( $bar-height * $num-bars ) + $computed-padding; // height o
   }
 
   #abi-1 span:nth-child(2) {
-    top: $bar-height * 2;
+    top: $bar-height + $padding;
   }
 
   #abi-1 span:nth-child(3) {
-    top: $bar-height * 4;
+    top: ( $bar-height * 2 ) + ( $padding * 2 );
   }
 
   #abi-1.open span:nth-child(1) {
@@ -98,11 +101,11 @@ $icon-height      : ( $bar-height * $num-bars ) + $computed-padding; // height o
   }
 
   #abi-2 span:nth-child(3), #abi-2 span:nth-child(4) {
-    top: $bar-height * 2;
+    top: $bar-height + $padding;
   }
 
   #abi-2 span:nth-child(5), #abi-2 span:nth-child(6) {
-    top: $bar-height * 4;
+    top: ( $bar-height * 2 ) + ( $padding * 2 );
   }
 
   #abi-2.open span:nth-child(1), #abi-2.open span:nth-child(6) {
@@ -155,11 +158,11 @@ $icon-height      : ( $bar-height * $num-bars ) + $computed-padding; // height o
   }
 
   #abi-3 span:nth-child(2), #abi-3 span:nth-child(3) {
-    top: $bar-height * 2;
+    top: $bar-height + $padding;
   }
 
   #abi-3 span:nth-child(4) {
-    top: $bar-height * 4;
+    top: ( $bar-height * 2 ) + ( $padding * 2 );
   }
 
   #abi-3.open span:nth-child(1) {
@@ -201,7 +204,7 @@ $icon-height      : ( $bar-height * $num-bars ) + $computed-padding; // height o
   }
 
   #abi-4 span:nth-child(2) {
-    top: $bar-height * 2;
+    top: $bar-height + $padding;
     -webkit-transform-origin: left center;
     -moz-transform-origin: left center;
     -o-transform-origin: left center;
@@ -209,7 +212,7 @@ $icon-height      : ( $bar-height * $num-bars ) + $computed-padding; // height o
   }
 
   #abi-4 span:nth-child(3) {
-    top: $bar-height * 4;
+    top: ( $bar-height * 2 ) + ( $padding * 2 );
     -webkit-transform-origin: left center;
     -moz-transform-origin: left center;
     -o-transform-origin: left center;
