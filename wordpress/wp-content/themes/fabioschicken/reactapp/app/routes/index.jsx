@@ -6,7 +6,10 @@ import AnimatedBurgerIcon from '../components/animated-burger-icon';
 
 const AppRoot = ( props ) => (
   <div>
-    <AnimatedBurgerIcon />
+    <AnimatedBurgerIcon /><br />
+    <AnimatedBurgerIcon type="abi-2" /><br />
+    <AnimatedBurgerIcon type="abi-3" /><br />
+    <AnimatedBurgerIcon type="abi-4" />
     {props.childen}
   </div>
 );

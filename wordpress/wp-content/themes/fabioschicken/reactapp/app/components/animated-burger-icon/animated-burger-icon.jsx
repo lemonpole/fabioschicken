@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './animated-burger-icon.scss';
 
-const typeBarNums = {
+const numSpans = {
   'abi-1': 3,
   'abi-2': 6,
   'abi-3': 4,
@@ -23,7 +23,7 @@ export default class AnimatedBurgerIcon extends Component {
   }
 
   renderBars = () => {
-    const num = typeBarNums[this.props.type];
+    const num = numSpans[this.props.type];
     const output = [];
 
     for( let i = 0; i < num; i++ ) {
