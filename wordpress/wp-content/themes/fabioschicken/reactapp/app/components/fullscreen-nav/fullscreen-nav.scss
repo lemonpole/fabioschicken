@@ -1,0 +1,86 @@
+:global {
+  nav {
+    z-index: 9;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: fade-out( red, .2 );
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity .25s;
+  }
+
+  nav.open {
+    opacity: 1;
+  }
+
+  nav ul {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+    color: white;
+    list-style-type: none;
+    animation: menu-rev 0.5s ease 0ms 1 normal both;
+  }
+
+  nav.open ul {
+    animation: menu 0.5s ease 0ms 1 normal both;
+  }
+
+  nav li {
+    display: block;
+    padding-bottom: 20px;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  nav li:before {
+    display: block;
+    content: "";
+    background: fade-out( white, .8 );
+    width: 100%;
+    height: 1px;
+    margin-bottom: 20px;
+    transform: scale( 0, 0 );
+  }
+
+  nav.open li:before {
+    transition: all 1s ease;
+    transform: scale( 1, 1 );
+  }
+
+  nav a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 4px;
+  }
+}
+
+@keyframes :global( menu ) {
+  from {
+    transform: translate( -50%, -80% ) perspective( 1000px ) rotateX( 80deg );
+    opacity: 0;
+  }
+  to {
+    transform: translate( -50%, -50% ) perspective( 1000px ) rotateX( 0deg );
+    opacity: 1;
+  }
+}
+
+@keyframes :global( menu-rev ) {
+  from {
+    transform: translate(-50%, -50%) perspective(1000px) rotateX(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-50%, -20%) perspective(1000px) rotateX(-80deg);
+    opacity: 0;
+  }
+}
