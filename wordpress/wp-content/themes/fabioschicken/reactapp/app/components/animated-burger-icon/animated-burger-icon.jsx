@@ -17,11 +17,13 @@ export default class AnimatedBurgerIcon extends Component {
   static defaultProps = {
     type: 'abi-1',
     containerStyle: {},
-    barStyle: {}
+    barStyle: {},
+    onClick: () => {}
   }
 
   handleOnClick = () => {
     this.setState({ toggled: !this.state.toggled });
+    this.props.onClick( !this.state.toggled );
   }
 
   renderBars = () => {
