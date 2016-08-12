@@ -4,7 +4,7 @@ import { Route } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AnimatedBurgerIcon from '../components/animated-burger-icon';
 
-const AppRoot = ( props ) => (
+const App = ( props ) => (
   <div>
     <AnimatedBurgerIcon
       type="abi-1"
@@ -20,12 +20,12 @@ const AppRoot = ( props ) => (
   </div>
 );
 
-const App = () => (
+const AppRoot = () => (
   <MuiThemeProvider>
-    <AppRoot />
+    <App />
   </MuiThemeProvider>
 );
 
 export default (
-  <Route path="/" component={App} />
+  <Route path="/" component={AppRoot} />
 );
