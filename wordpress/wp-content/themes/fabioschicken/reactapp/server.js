@@ -1,12 +1,15 @@
-var path = require( 'path' );
-var express = require( 'express' );
-var webpack = require( 'webpack' );
-var webpackDevMiddleware = require( 'webpack-dev-middleware' );
-var webpackHotMiddleware = require( 'webpack-hot-middleware' );
-var config = require( path.join( __dirname, 'webpack-dev.js' ) );
+"use strict";
+const path = require( 'path' );
+const express = require( 'express' );
+const webpack = require( 'webpack' );
+const webpackDevMiddleware = require( 'webpack-dev-middleware' );
+const webpackHotMiddleware = require( 'webpack-hot-middleware' );
+const config = require( path.join( __dirname, 'webpack-dev.js' ) );
 
-var app = express();
-var compiler = webpack( config );
+const app = express();
+const compiler = webpack( config );
+
+const PORT = 8080;
 
 app.use( webpackDevMiddleware( compiler, {
   noInfo    : true,
@@ -15,15 +18,15 @@ app.use( webpackDevMiddleware( compiler, {
 
 app.use( webpackHotMiddleware( compiler ) );
 
-app.get( '*', function( req, res ) {
+app.get( '*', ( req, res ) => {
   res.sendFile( path.join( __dirname, 'index.html' ) );
 });
 
-app.listen( 8080, '0.0.0.0', function( err ) {
+app.listen( PORT, ( err ) => {
   if( err ) {
     console.log( err );
     return;
   }
 
-  console.log( 'Listening at http://localhost:8080' );
+  console.log( 'Listening at http://localhost:' + PORT );
 });
