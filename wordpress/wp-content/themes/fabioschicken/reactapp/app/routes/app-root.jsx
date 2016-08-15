@@ -27,7 +27,7 @@ export default class AppRoot extends Component {
           }}
           barStyle={{
             background: '#e7e7e7',
-            height: '9px'
+            height: '3px'
           }}
         />
         {this.props.children}
