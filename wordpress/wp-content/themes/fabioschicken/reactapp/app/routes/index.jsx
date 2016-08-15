@@ -1,15 +1,18 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppRoot from './app-root';
+import Home from './home';
 
-const App = () => (
+const App = ( props ) => (
   <MuiThemeProvider>
-    <AppRoot />
+    <AppRoot children={props.children} />
   </MuiThemeProvider>
 );
 
 export default (
-  <Route path="/" component={App} />
+  <Route path="/" component={App}>
+    <IndexRoute component={Home} />
+  </Route>
 );

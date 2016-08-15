@@ -30,7 +30,7 @@ export default class AppRoot extends Component {
             height: '9px'
           }}
         />
-        {this.props.childen}
+        {this.props.children}
       </div>
     );
   }

@@ -26,6 +26,13 @@ exports.loaders = {
         'sass'
       ]
     }
+  },
+  statics: {
+    other: {
+      test: /\.(png|jpg|gif)$/,
+      include: path.join( __dirname, 'app' ),
+      loader: 'url-loader?limit=100000'
+    }
   }
 };
 
