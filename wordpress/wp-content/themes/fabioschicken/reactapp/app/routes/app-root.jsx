@@ -8,18 +8,24 @@ export default class AppRoot extends Component {
     navToggled: false
   }
 
-  handleBurgerClick = ( navToggled ) => {
-    this.setState({ navToggled });
+  handleBurgerClick = () => {
+    this.setState({ navToggled: !this.state.navToggled });
+  }
+
+  handleLinkClick = () => {
+    this.setState({ navToggled: false });
   }
 
   render() {
     return (
       <div>
         <FullScreenNav isOpen={this.state.navToggled}>
-          <Link to="/">Home</Link>
+          <Link to="/" onClick={this.handleLinkClick}>Home</Link>
+          <Link to="/menu" onClick={this.handleLinkClick}>Menu</Link>
         </FullScreenNav>
         <AnimatedBurgerIcon
           type="abi-1"
+          isToggled={this.state.navToggled}
           onClick={this.handleBurgerClick}
           containerStyle={{
             position: 'absolute', top: 20, right: 20,

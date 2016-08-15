@@ -10,20 +10,12 @@ const numSpans = {
 
 // https://codepen.io/designcouch/pen/Atyop
 export default class AnimatedBurgerIcon extends Component {
-  state = {
-    toggled: false
-  }
-
   static defaultProps = {
     type: 'abi-1',
+    isToggled: false,
     containerStyle: {},
     barStyle: {},
     onClick: () => {}
-  }
-
-  handleOnClick = () => {
-    this.setState({ toggled: !this.state.toggled });
-    this.props.onClick( !this.state.toggled );
   }
 
   renderBars = () => {
@@ -41,9 +33,9 @@ export default class AnimatedBurgerIcon extends Component {
     return (
       <div
         id={this.props.type}
-        className={this.state.toggled && 'open'}
+        className={this.props.isToggled && 'open'}
         style={this.props.containerStyle}
-        onClick={this.handleOnClick}
+        onClick={() => this.props.onClick()}
       >
         {this.renderBars()}
       </div>
