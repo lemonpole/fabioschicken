@@ -1,6 +1,6 @@
 :global {
   nav {
-    z-index: 9;
+    z-index: -1;
     position: fixed;
     top: 0;
     left: 0;
@@ -13,6 +13,7 @@
   }
 
   nav.open {
+    z-index: 9;
     opacity: 1;
   }
 
