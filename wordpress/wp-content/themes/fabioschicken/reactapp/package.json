@@ -5,7 +5,7 @@
   "author": "Steve Rivera",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --colors --inline --hot --config webpack-dev.js",
+    "start": "node server.js",
     "build": "webpack --colors --config webpack-dev.js",
     "lint": "eslint --ext .js,.jsx app",
     "clean": "rm -rf dist"
@@ -46,6 +46,7 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.12.2"
   }
 }

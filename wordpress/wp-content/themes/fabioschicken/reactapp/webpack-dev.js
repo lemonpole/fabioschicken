@@ -1,12 +1,16 @@
-var webpackConfig = require( './webpack-shared.js' );
+var path = require( 'path' );
+var webpack = require( 'webpack' );
+var webpackConfig = require( path.join( __dirname, './webpack-shared.js' ) );
 
 module.exports = {
   entry: [
+    'webpack-hot-middleware/client',
     'babel-polyfill',
-    './app'
+    path.join( __dirname, 'app' )
   ],
   output: {
-    path: '../',
+    path: path.join( __dirname, '../' ),
+    publicPath: '/assets/',
     filename: 'bundle.js'
   },
   resolve: webpackConfig.resolve,
@@ -25,5 +29,9 @@ module.exports = {
   },
   eslint: {
     emitWarning: true
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ]
 };
