@@ -4,11 +4,7 @@ exports.loaders = {
   js: {
     test: /\.jsx?$/,
     exclude: /node_modules/,
-    loader: 'babel-loader',
-    query: {
-      plugins: [ 'transform-runtime', 'transform-class-properties' ],
-      presets: [ 'es2015', 'react' ]
-    }
+    loader: 'babel'
   },
   styles: {
     flexboxgrid: {
