@@ -5,13 +5,13 @@ var webpackConfig = require( path.join( __dirname, './webpack-shared.js' ) );
 module.exports = {
   entry: [
     'webpack-hot-middleware/client',
-    'babel-polyfill',
     path.join( __dirname, 'app' )
   ],
   output: {
     path: path.join( __dirname, '../' ),
     publicPath: '/assets/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    chunkFilename: '[name]-[chunkhash].bundle.js'
   },
   resolve: webpackConfig.resolve,
   module: {
@@ -31,6 +31,7 @@ module.exports = {
     emitWarning: true
   },
   plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ]
