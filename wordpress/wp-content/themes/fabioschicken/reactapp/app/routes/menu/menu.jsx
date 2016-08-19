@@ -17,95 +17,98 @@ const tabStyles = {
 };
 
 const MenuListContainer = () => (
-  <Row>
-    <Col xs={12} md={4}>
-      <Row>
-        <Col xs={9} md={10}>
-          <h2>Carne Asada</h2>
-          <p>Deliciosa carne de res con nuestro sazon casero. Asada a su gusto</p>
-        </Col>
-        <Col xs={3} md={2}>
-          <code>$13.37</code>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={9} md={10}>
-          <h2>Pechuga a la plancha</h2>
-          <p />
-        </Col>
-        <Col xs={3} md={2}>
-          <code>$13.37</code>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={9} md={10}>
-          <h2>Chuleta Colombiana</h2>
-          <p>Chuleta de cerdo empanisada. No tiene hueso.</p>
-        </Col>
-        <Col xs={3} md={2}>
-          <code>$13.37</code>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={9} md={10}>
-          <h2>Pechuga a la milanesa</h2>
-          <p />
-        </Col>
-        <Col xs={3} md={2}>
-          <code>$13.37</code>
-        </Col>
-      </Row>
-    </Col>
-    <Col xs={12} md={4}>
-      <Row>
-        <Col xs={9} md={10}>
-          <h2>Pollo Asado</h2>
-          <p />
-        </Col>
-        <Col xs={3} md={2}>
-          <code>$13.37</code>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={9} md={10}>
-          <h2>Bandeja paisa</h2>
-          <p />
-        </Col>
-        <Col xs={3} md={2}>
-          <code>$13.37</code>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={9} md={10}>
-          <h2>Lomo de cerdo</h2>
-          <p>Lomo a la parilla. Bien asado con nuestro sazon</p>
-        </Col>
-        <Col xs={3} md={2}>
-          <code>$13.37</code>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={9} md={10}>
-          <h2>Arepa con queso</h2>
-          <p />
-        </Col>
-        <Col xs={3} md={2}>
-          <code>$13.37</code>
-        </Col>
-      </Row>
-    </Col>
-    <Col xs={12} md={4}>
-      <Row>
-        <Col xs={9} md={10}>
-          <h2>Ceviche de camarones</h2>
-          <p />
-        </Col>
-        <Col xs={3} md={2}>
-          <code>$13.37</code>
-        </Col>
-      </Row>
-    </Col>
-  </Row>
+  <div>
+    <h2>General</h2>
+    <Row>
+      <Col xs={12} md={4}>
+        <Row>
+          <Col xs={9} md={10}>
+            <span className="lead">Carne Asada</span>
+            <p>Deliciosa carne de res con nuestro sazon casero. Asada a su gusto</p>
+          </Col>
+          <Col xs={3} md={2}>
+            <code>$13.37</code>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={9} md={10}>
+            <span className="lead">Pechuga a la plancha</span>
+            <p />
+          </Col>
+          <Col xs={3} md={2}>
+            <code>$13.37</code>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={9} md={10}>
+            <span className="lead">Chuleta Colombiana</span>
+            <p>Chuleta de cerdo empanisada. No tiene hueso.</p>
+          </Col>
+          <Col xs={3} md={2}>
+            <code>$13.37</code>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={9} md={10}>
+            <span className="lead">Pechuga a la milanesa</span>
+            <p />
+          </Col>
+          <Col xs={3} md={2}>
+            <code>$13.37</code>
+          </Col>
+        </Row>
+      </Col>
+      <Col xs={12} md={4}>
+        <Row>
+          <Col xs={9} md={10}>
+            <span className="lead">Pollo Asado</span>
+            <p />
+          </Col>
+          <Col xs={3} md={2}>
+            <code>$13.37</code>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={9} md={10}>
+            <span className="lead">Bandeja paisa</span>
+            <p />
+          </Col>
+          <Col xs={3} md={2}>
+            <code>$13.37</code>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={9} md={10}>
+            <span className="lead">Lomo de cerdo</span>
+            <p>Lomo a la parilla. Bien asado con nuestro sazon</p>
+          </Col>
+          <Col xs={3} md={2}>
+            <code>$13.37</code>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={9} md={10}>
+            <span className="lead">Arepa con queso</span>
+            <p />
+          </Col>
+          <Col xs={3} md={2}>
+            <code>$13.37</code>
+          </Col>
+        </Row>
+      </Col>
+      <Col xs={12} md={4}>
+        <Row>
+          <Col xs={9} md={10}>
+            <span className="lead">Ceviche de camarones</span>
+            <p />
+          </Col>
+          <Col xs={3} md={2}>
+            <code>$13.37</code>
+          </Col>
+        </Row>
+      </Col>
+    </Row>
+  </div>
 );
 
 const Menu = ( props ) => (
