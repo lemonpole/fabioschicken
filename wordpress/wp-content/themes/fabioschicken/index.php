@@ -8,7 +8,6 @@
   </head>
   <body>
     <div id="app"></div>
-
     <script src="<?php echo $root_path; ?>/bundle.js"></script>
   </body>
 </html>
