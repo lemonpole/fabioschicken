@@ -2,31 +2,67 @@
 namespace FC16\PostTypes;
 
 class Foods {
-  const NAME = 'fc16_foods';
-  const DEFAULT_SETTINGS = array(
-    'labels'      => array(
+  const NAME              = 'fc16_foods';
+  const METABOX_ID        = self::NAME . '_mb';
+  const METABOX_NONCE     = self::METABOX_ID . '_nonce';
+  const META_DESCR        = self::NAME . '_descr';
+  const DEFAULT_SETTINGS  = array(
+    'labels'                => array(
       'name'          => ( 'Foods' ),
       'singular_name' => ( 'Food Item' )
     ),
-    'public'      => true,
-    'menu_icon'   => 'dashicons-carrot',
-    'supports'    => array(
-      'title',
-      'excerpt'
+    'public'                => true,
+    'menu_icon'             => 'dashicons-carrot',
+    'supports'              => array(
+      'title'
     ),
-    'taxonomies'  => array(
+    'register_meta_box_cb'  => array( __CLASS__, 'register_meta_box' ),
+    'taxonomies'            => array(
       'category'
     )
   );
 
   public static function init() {
-    add_action( 'init', array( get_called_class(), 'register' ) );
-    add_action( 'wp_ajax_foods', array( get_called_class(), 'get_all_foods' ) );
-    add_action( 'wp_ajax_nopriv_foods', array( get_called_class(), 'get_all_foods' ) );
+    add_action( 'init', array( __CLASS__, 'register' ) );
+    add_action( 'save_post', array( __CLASS__, 'save_post' ), 10, 3 );
+    add_action( 'wp_ajax_foods', array( __CLASS__, 'get_all_foods' ) );
+    add_action( 'wp_ajax_nopriv_foods', array( __CLASS__, 'get_all_foods' ) );
   }
 
   public static function register() {
     register_post_type( self::NAME, self::DEFAULT_SETTINGS );
+  }
+
+  public static function register_meta_box() {
+    add_meta_box( self::METABOX_ID, ( 'Description' ), array( __CLASS__, 'render_meta_box' ), self::NAME, 'normal' );
+  }
+
+  public static function render_meta_box( $post ) {
+    // add nonce field so we can check for it later
+    wp_nonce_field( self::METABOX_ID, self::METABOX_NONCE );
+
+    // load any existing values from db and render editor
+    $value = get_post_meta( $post->ID, self::META_DESCR, true );
+    wp_editor( $value, self::META_DESCR, array(
+      'media_buttons' => false,
+      'teeny'         => true,
+      'textarea_name' => self::META_DESCR
+    ));
+  }
+
+  public static function save_post( $post_id, $post, $update ) {
+    // some sanity checks first
+    if( self::NAME != $post->post_type
+      || !isset( $_POST[ self::METABOX_NONCE ] )
+      || !wp_verify_nonce( $_POST[ self::METABOX_NONCE ], self::METABOX_ID )
+      || defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE
+    ) {
+      return;
+    }
+
+    // okay we got this far. safe to modify the data now!
+    $data = sanitize_text_field( $_POST[ self::META_DESCR ] );
+    update_post_meta( $post_id, self::META_DESCR, $data );
   }
 
   public static function get_all_foods() {
