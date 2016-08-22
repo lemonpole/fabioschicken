@@ -21,12 +21,20 @@ class Foods {
       'category'
     )
   );
+  const CATEGORIES        = array(
+    ( 'Food Platters' ),
+    ( 'Popular Platters' ),
+    ( 'Appetizers/Drinks' ),
+    ( 'Daily Specials' )
+  );
 
   public static function init() {
     add_action( 'init', array( __CLASS__, 'register' ) );
     add_action( 'save_post', array( __CLASS__, 'save_post' ), 10, 3 );
     add_action( 'wp_ajax_foods', array( __CLASS__, 'get_all_foods' ) );
     add_action( 'wp_ajax_nopriv_foods', array( __CLASS__, 'get_all_foods' ) );
+
+    self::register_taxonomies();
   }
 
   public static function register() {
@@ -63,6 +71,17 @@ class Foods {
     // okay we got this far. safe to modify the data now!
     $data = sanitize_text_field( $_POST[ self::META_DESCR ] );
     update_post_meta( $post_id, self::META_DESCR, $data );
+  }
+
+  private static function register_taxonomies() {
+    foreach( self::CATEGORIES as $cat ) {
+      $term_exists = term_exists( $cat, 'category' );
+      if( $term !== 0 && $term !== null ) {
+        continue;
+      }
+
+      wp_insert_term( $cat, 'category' );
+    }
   }
 
   public static function get_all_foods() {
