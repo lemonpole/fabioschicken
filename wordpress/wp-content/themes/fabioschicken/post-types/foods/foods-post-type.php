@@ -21,7 +21,7 @@ class Foods {
       'category'
     )
   );
-  const CATEGORIES        = array(
+  const INIT_CATEGORIES        = array(
     ( 'Food Platters' ),
     ( 'Popular Platters' ),
     ( 'Appetizers/Drinks' ),
@@ -74,7 +74,7 @@ class Foods {
   }
 
   private static function register_taxonomies() {
-    foreach( self::CATEGORIES as $cat ) {
+    foreach( self::INIT_CATEGORIES as $cat ) {
       $term_exists = term_exists( $cat, 'category' );
       if( $term !== 0 && $term !== null ) {
         continue;
@@ -84,11 +84,27 @@ class Foods {
     }
   }
 
+  /*
+  * wp-admin/admin-ajax.php?action=foods
+  * Gets all foods custom post type and groups them by category
+  */
   public static function get_all_foods() {
-    $posts = get_posts( array(
-      'post_type' => self::NAME
+    // get all categories we're going to need to group by
+    $categories = get_categories( array(
+      'taxonomy'  => 'category',
+      'parent'    => 0,
+      'exclude'   => 1 // don't show: Uncategorized'
     ));
 
-    wp_send_json_success( $posts );
+    // get the posts for each category
+    $result = [];
+    foreach( $categories as $category ) {
+      $result[ $category->name ] = get_posts( array(
+        'post_type'     => self::NAME,
+        'category_name' => $category->name
+      ));
+    }
+
+    wp_send_json_success( $result );
   }
 }
