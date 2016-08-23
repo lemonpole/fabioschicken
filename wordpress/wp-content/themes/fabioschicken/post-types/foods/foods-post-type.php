@@ -50,8 +50,7 @@ class Foods {
     wp_nonce_field( self::METABOX_ID, self::METABOX_NONCE );
 
     // load any existing values from db and render editor
-    $value = get_post_meta( $post->ID, self::META_DESCR, true );
-    wp_editor( $value, self::META_DESCR, array(
+    wp_editor( $post->post_content, self::META_DESCR, array(
       'media_buttons' => false,
       'teeny'         => true,
       'textarea_name' => self::META_DESCR
@@ -68,9 +67,15 @@ class Foods {
       return;
     }
 
+    // unhook this function so it doesn't loop infinitely!
+    remove_action( 'save_post', array( __CLASS__, 'save_post' ) );
+
     // okay we got this far. safe to modify the data now!
+    // updating the post calls save_post again which is why we disabled it above
     $data = sanitize_text_field( $_POST[ self::META_DESCR ] );
-    update_post_meta( $post_id, self::META_DESCR, $data );
+    $post->post_content = $data;
+
+    wp_update_post( $post );
   }
 
   private static function register_taxonomies() {
