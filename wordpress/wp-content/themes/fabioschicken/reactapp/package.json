@@ -1,9 +1,10 @@
 {
   "name": "fabioschicken",
   "version": "1.0.0",
-  "description": "",
+  "description": "Fabio's Chicken Restaurant client-side web app built in react",
   "author": "Steve Rivera",
-  "license": "MIT",
+  "license": "UNLICENSED",
+  "repository": "github:lemonpole/fabioschicken.git",
   "scripts": {
     "start": "node server.js",
     "build": "webpack --colors --config webpack-dev.js",
