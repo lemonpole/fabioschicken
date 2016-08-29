@@ -29,7 +29,7 @@ class Foods {
   );
 
   public static function init() {
-    add_action( 'init', array( __CLASS__, 'register' ) );
+    add_action( 'init', array( __CLASS__, 'wp_init' ) );
     add_action( 'save_post', array( __CLASS__, 'save_post' ), 10, 3 );
     add_action( 'wp_ajax_foods', array( __CLASS__, 'get_all_foods' ) );
     add_action( 'wp_ajax_nopriv_foods', array( __CLASS__, 'get_all_foods' ) );
@@ -39,7 +39,8 @@ class Foods {
     self::register_taxonomies();
   }
 
-  public static function register() {
+  public static function wp_init() {
+    header( 'Access-Control-Allow-Origin: *' ); // needed to allow front-end to send ajax requests
     register_post_type( self::NAME, self::DEFAULT_SETTINGS );
   }
 

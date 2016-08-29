@@ -1,5 +1,5 @@
 import { RECEIVE_BLOGINFO, REQUEST_BLOGINFO } from '../constants';
-import { API_HOST } from '../../../config';
+import { API_HOST } from '../../../../config';
 
 const requestBloginfo = () => ({
   type: REQUEST_BLOGINFO

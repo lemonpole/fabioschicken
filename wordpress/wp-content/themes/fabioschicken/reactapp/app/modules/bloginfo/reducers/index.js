@@ -7,12 +7,12 @@ const initialState = {
 
 const bloginfo = ( state = initialState, action ) => {
   switch( action.type ) {
-    case actions.REQUEST_SECRETS:
+    case actions.REQUEST_BLOGINFO:
       return {
         ...state,
         isLoading: true
       };
-    case actions.RECEIVE_SECRETS:
+    case actions.RECEIVE_BLOGINFO:
       return {
         ...state,
         isLoading: false,

@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { getBloginfo } from '../modules/bloginfo/actions';
 import AnimatedBurgerIcon from '../components/animated-burger-icon';
 import FullScreenNav from '../components/fullscreen-nav';
 
-export default class AppRoot extends Component {
+class AppRoot extends Component {
   state = {
     navToggled: false
+  }
+
+  componentDidMount() {
+    this.props.dispatch( getBloginfo() );
   }
 
   handleBurgerClick = () => {
@@ -41,3 +47,5 @@ export default class AppRoot extends Component {
     );
   }
 }
+
+export default connect()( AppRoot );
