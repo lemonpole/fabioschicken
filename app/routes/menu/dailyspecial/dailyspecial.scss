@@ -1,0 +1,11 @@
+$font-color: #000;
+
+.container {
+  background-color: #e7e7e7;
+  color: $font-color;
+  height: 100vh;
+
+  h1 {
+    color: red;
+  }
+}
