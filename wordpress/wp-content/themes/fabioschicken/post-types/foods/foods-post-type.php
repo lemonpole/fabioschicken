@@ -21,7 +21,7 @@ class Foods {
       'category'
     )
   );
-  const INIT_CATEGORIES        = array(
+  const INIT_CATEGORIES   = array(
     ( 'Food Platters' ),
     ( 'Popular Platters' ),
     ( 'Appetizers/Drinks' ),
@@ -33,6 +33,8 @@ class Foods {
     add_action( 'save_post', array( __CLASS__, 'save_post' ), 10, 3 );
     add_action( 'wp_ajax_foods', array( __CLASS__, 'get_all_foods' ) );
     add_action( 'wp_ajax_nopriv_foods', array( __CLASS__, 'get_all_foods' ) );
+    add_action( 'wp_ajax_bloginfo', array( __CLASS__, 'get_bloginfo' ) );
+    add_action( 'wp_ajax_nopriv_bloginfo', array( __CLASS__, 'get_bloginfo' ) );
 
     self::register_taxonomies();
   }
@@ -111,5 +113,15 @@ class Foods {
     }
 
     wp_send_json_success( $result );
+  }
+
+  public static function get_bloginfo() {
+    $name = get_bloginfo( 'name' );
+    $description = get_bloginfo( 'description' );
+
+    wp_send_json_success([
+      'name'        => $name,
+      'description' => $description
+    ]);
   }
 }
