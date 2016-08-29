@@ -83,7 +83,7 @@ class Foods {
 
   private static function register_taxonomies() {
     foreach( self::INIT_CATEGORIES as $cat ) {
-      $term_exists = term_exists( $cat, 'category' );
+      $term = term_exists( $cat, 'category' );
       if( $term !== 0 && $term !== null ) {
         continue;
       }
