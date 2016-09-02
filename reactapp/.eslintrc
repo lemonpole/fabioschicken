@@ -81,7 +81,7 @@
       { "code": 120 }
     ],
     "semi": 2,
-    "computed-property-spacing": 2,
+    "computed-property-spacing": 0,
     "radix": 0,
     "space-in-parens": [
       "error",

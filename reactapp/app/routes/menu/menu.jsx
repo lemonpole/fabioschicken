@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Row, Col } from 'react-flexbox-grid';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import styles from './menu.scss';
@@ -16,124 +17,58 @@ const tabStyles = {
   }
 };
 
-const MenuListContainer = () => (
-  <div>
-    <h2>General</h2>
-    <Row>
-      <Col xs={12} md={4}>
-        <Row>
+const MenuList = ( props ) => (
+  <Row>
+    <Col xs={12} md={4}>
+      {props.items.map( ( item, id ) => (
+        <Row key={id}>
           <Col xs={9} md={10}>
-            <span className="lead">Carne Asada</span>
-            <p>Deliciosa carne de res con nuestro sazon casero. Asada a su gusto</p>
+            <span className={styles.lead}>{item.post_title}</span>
+            <p>{item.post_content}</p>
           </Col>
           <Col xs={3} md={2}>
             <code>$13.37</code>
           </Col>
         </Row>
-        <Row>
-          <Col xs={9} md={10}>
-            <span className="lead">Pechuga a la plancha</span>
-            <p />
-          </Col>
-          <Col xs={3} md={2}>
-            <code>$13.37</code>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={9} md={10}>
-            <span className="lead">Chuleta Colombiana</span>
-            <p>Chuleta de cerdo empanisada. No tiene hueso.</p>
-          </Col>
-          <Col xs={3} md={2}>
-            <code>$13.37</code>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={9} md={10}>
-            <span className="lead">Pechuga a la milanesa</span>
-            <p />
-          </Col>
-          <Col xs={3} md={2}>
-            <code>$13.37</code>
-          </Col>
-        </Row>
-      </Col>
-      <Col xs={12} md={4}>
-        <Row>
-          <Col xs={9} md={10}>
-            <span className="lead">Pollo Asado</span>
-            <p />
-          </Col>
-          <Col xs={3} md={2}>
-            <code>$13.37</code>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={9} md={10}>
-            <span className="lead">Bandeja paisa</span>
-            <p />
-          </Col>
-          <Col xs={3} md={2}>
-            <code>$13.37</code>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={9} md={10}>
-            <span className="lead">Lomo de cerdo</span>
-            <p>Lomo a la parilla. Bien asado con nuestro sazon</p>
-          </Col>
-          <Col xs={3} md={2}>
-            <code>$13.37</code>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={9} md={10}>
-            <span className="lead">Arepa con queso</span>
-            <p />
-          </Col>
-          <Col xs={3} md={2}>
-            <code>$13.37</code>
-          </Col>
-        </Row>
-      </Col>
-      <Col xs={12} md={4}>
-        <Row>
-          <Col xs={9} md={10}>
-            <span className="lead">Ceviche de camarones</span>
-            <p />
-          </Col>
-          <Col xs={3} md={2}>
-            <code>$13.37</code>
-          </Col>
-        </Row>
-      </Col>
-    </Row>
-  </div>
+      ) )}
+    </Col>
+  </Row>
 );
 
-const Menu = ( props ) => (
-  <section className={styles.container}>
-    <div className={styles.contentbox}>
-      <Tabs
-        tabItemContainerStyle={tabStyles.tabItemContainer}
-        inkBarStyle={tabStyles.inkBar}
-        contentContainerStyle={tabStyles.contentContainer}
-      >
-        <Tab label="Food Platters">
-          <MenuListContainer />
-        </Tab>
-        <Tab label="Popular Platters">
-          <div />
-        </Tab>
-        <Tab label="Appetizers and Drinks">
-          <div />
-        </Tab>
-        <Tab label="Daily Specials">
-          <div />
-        </Tab>
-      </Tabs>
-    </div>
-  </section>
-);
+class Menu extends Component {
+  renderTabs = () => {
+    const { foods } = this.props;
+    const categories = Object.keys( foods.data );
+    const tabList = [];
 
-export default Menu;
+    categories.map( ( category, id ) => tabList.push(
+      <Tab label={category} key={id}>
+        <MenuList items={foods.data[ category ]} />
+      </Tab>
+    ) );
+
+    return tabList;
+  }
+
+  render() {
+    return (
+      <section className={styles.container}>
+        <div className={styles.contentbox}>
+          <Tabs
+            tabItemContainerStyle={tabStyles.tabItemContainer}
+            inkBarStyle={tabStyles.inkBar}
+            contentContainerStyle={tabStyles.contentContainer}
+          >
+            {this.renderTabs()}
+          </Tabs>
+        </div>
+      </section>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  foods: state.foods
+});
+
+export default connect( mapStateToProps )( Menu );
