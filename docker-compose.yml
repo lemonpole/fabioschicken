@@ -21,7 +21,7 @@ services:
     volumes:
       - "./wordpress:/var/www/html"
     ports:
-      - "8000"
+      - "8080:80"
     environment:
       WORDPRESS_DB_HOST: mysql:3306
       WORDPRESS_DB_PASSWORD: wordpress
@@ -32,14 +32,12 @@ services:
     links:
       - reactapp:reactapp
     ports:
-      - "80"
+      - "80:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
 
   reactapp:
     build: ./reactapp
-    ports:
-      - "8080"
     volumes:
       - ./reactapp:/src
       - /src/node_modules
