@@ -5,7 +5,7 @@ var webpackConfig = require( path.join( __dirname, './webpack-shared.js' ) );
 module.exports = {
   entry: [
     'webpack-hot-middleware/client',
-    path.join( __dirname, 'app' )
+    path.join( __dirname, '../app' )
   ],
   output: {
     path: path.join( __dirname, '../' ),

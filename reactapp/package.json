@@ -6,10 +6,9 @@
   "license": "UNLICENSED",
   "repository": "github:lemonpole/fabioschicken.git",
   "scripts": {
-    "start": "node server.js",
-    "build": "webpack --colors --config webpack-dev.js",
-    "lint": "eslint --ext .js,.jsx app",
-    "clean": "rm -rf dist"
+    "start": "node ./server/server.js",
+    "build": "webpack --colors --config ./webpack/webpack-dev.js",
+    "lint": "eslint --ext .js,.jsx app"
   },
   "dependencies": {
     "babel-polyfill": "^6.9.1",
