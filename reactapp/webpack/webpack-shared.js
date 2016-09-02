@@ -14,7 +14,7 @@ exports.loaders = {
     },
     app: {
       test: /\.scss$/,
-      include: path.join( __dirname, 'app' ),
+      include: path.join( __dirname, '../app' ),
       loaders: [
         'style',
         'css?modules&localIdentName=[name]__[local]___[hash:base64:5]',
@@ -26,7 +26,7 @@ exports.loaders = {
   statics: {
     other: {
       test: /\.(png|jpg|gif)$/,
-      include: path.join( __dirname, 'app' ),
+      include: path.join( __dirname, '../app' ),
       loader: 'url-loader?limit=100000'
     }
   }

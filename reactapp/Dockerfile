@@ -1,8 +1,5 @@
 # Set the base image to latest node (for now)
-FROM      node:latest
-
-# Install nodemon
-RUN       npm install -g nodemon
+FROM      node:6
 
 # Provides cached layer for node_modules
 COPY      package.json /src/package.json
