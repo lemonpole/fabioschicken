@@ -4,7 +4,8 @@ services:
     restart: always
     image: mysql:5.7
     volumes:
-      - "./mysql/data:/var/lib/mysql"
+      - ./mysql/dumps:/docker-entrypoint-initdb.d
+      - ./mysql/data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: wordpress
       MYSQL_DATABASE: wordpress
@@ -19,7 +20,7 @@ services:
     links:
       - mysql
     volumes:
-      - "./wordpress:/var/www/html"
+      - ./wordpress:/var/www/html
     ports:
       - "8080:80"
     environment:
