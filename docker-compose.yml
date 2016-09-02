@@ -20,7 +20,7 @@ services:
     links:
       - mysql
     volumes:
-      - ./wordpress:/var/www/html
+      - ./wordpress/theme:/var/www/html/wp-content/themes/fabioschicken
     ports:
       - "8080:80"
     environment:
