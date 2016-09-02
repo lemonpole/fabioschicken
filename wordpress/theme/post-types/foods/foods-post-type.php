@@ -108,8 +108,9 @@ class Foods {
     $result = [];
     foreach( $categories as $category ) {
       $result[ $category->name ] = get_posts( array(
-        'post_type'     => self::NAME,
-        'category_name' => $category->name
+        'post_type'   => self::NAME,
+        'category'    => $category->term_id,
+        'numberposts' => 0
       ));
     }
 
