@@ -1,10 +1,10 @@
 version: '2'
 services:
-  db:
+  mysql:
     restart: always
     image: mysql:5.7
     volumes:
-      - "./mysqldata:/var/lib/mysql"
+      - "./mysql/data:/var/lib/mysql"
     environment:
       MYSQL_ROOT_PASSWORD: wordpress
       MYSQL_DATABASE: wordpress
@@ -13,15 +13,33 @@ services:
 
   wordpress:
     restart: always
-    depends_on:
-      - db
-    links:
-      - db
     image: wordpress:latest
+    depends_on:
+      - mysql
+    links:
+      - mysql
     volumes:
       - "./wordpress:/var/www/html"
     ports:
-      - "8000:80"
+      - "8000"
     environment:
-      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_HOST: mysql:3306
       WORDPRESS_DB_PASSWORD: wordpress
+
+  nginx:
+    restart: always
+    image: nginx
+    links:
+      - reactapp:reactapp
+    ports:
+      - "80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+
+  reactapp:
+    build: ./reactapp
+    ports:
+      - "8080"
+    volumes:
+      - ./reactapp:/src
+      - /src/node_modules
