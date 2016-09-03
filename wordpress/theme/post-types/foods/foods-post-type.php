@@ -95,6 +95,8 @@ class Foods {
   /*
   * wp-admin/admin-ajax.php?action=foods
   * Gets all foods custom post type and groups them by category
+  *
+  * TODO: HOLY SHIT REFACTOR PLZZZZ
   */
   public static function get_all_foods() {
     // get all categories we're going to need to group by
@@ -104,14 +106,35 @@ class Foods {
       'exclude'   => 1 // don't show: Uncategorized'
     ));
 
+    // fetch any children the top-level categories may have
+    foreach( $categories as $category ) {
+      $category->{'children'} = get_categories( array(
+        'child_of'  => $category->term_id
+      ));
+    }
+
     // get the posts for each category
+    // if it has no children we place them directly in the object
+    // if it has children we loop through those instead
     $result = [];
     foreach( $categories as $category ) {
-      $result[ $category->name ] = get_posts( array(
-        'post_type'   => self::NAME,
-        'category'    => $category->term_id,
-        'numberposts' => 0
-      ));
+      if( sizeof( $category->children ) === 0 ) {
+        $result[ $category->name ] = get_posts( array(
+          'post_type'   => self::NAME,
+          'category'    => $category->term_id,
+          'numberposts' => 0
+        ));
+      } else {
+        $result[ $category->name ][ 'children' ] = [];
+      }
+
+      foreach( $category->children as $child_cat ) {
+        $result[ $category->name ][ 'children' ][ $child_cat->name ] = get_posts( array(
+          'post_type'   => self::NAME,
+          'category'    => $child_cat->term_id,
+          'numberposts' => 0
+        ));
+      }
     }
 
     wp_send_json_success( $result );
