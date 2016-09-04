@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Tabs, Tab } from 'material-ui/Tabs';
+import DailyMenuContainer from '../../components/DailyMenuContainer';
 import styles from './menu.scss';
 
 const tabStyles = {
@@ -18,11 +19,12 @@ const tabStyles = {
 
 class Menu extends Component {
   renderTab = ( category, key ) => {
+    const { data } = this.props.foods;
     let content;
 
     switch( category ) {
       case 'Daily Specials':
-        content = ( <div>I AM DAILY SPECIALS</div> );
+        content = ( <DailyMenuContainer children={data[ category ].children} /> );
         break;
       case 'Appetizers/Drinks':
         content = ( <div>I AM THE APPETIZERS</div> );
