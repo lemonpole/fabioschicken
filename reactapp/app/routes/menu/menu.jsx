@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import DailyMenuContainer from '../../components/DailyMenuContainer';
+import GeneralMenuContainer from '../../components/GeneralMenuContainer';
 import styles from './menu.scss';
 
 const tabStyles = {
@@ -30,7 +31,7 @@ class Menu extends Component {
         content = ( <div>I AM THE APPETIZERS</div> );
         break;
       default:
-        content = ( <div>I AM EVERYBODY ELSE</div> );
+        content = ( <GeneralMenuContainer children={data[ category ]} /> );
     }
 
     return (
