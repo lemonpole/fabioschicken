@@ -10,8 +10,5 @@ RUN       cd /src/ \
 WORKDIR   /src
 ADD       . /src
 
-# Expose port
-EXPOSE    8080
-
 # Run app using nodemon
 CMD       [ "npm", "start" ]
