@@ -1,0 +1,44 @@
+version: '2'
+services:
+  mysql:
+    restart: always
+    image: mysql:5.7
+    volumes:
+      - ./mysql/dumps:/docker-entrypoint-initdb.d
+      - ./mysql/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+
+  wordpress:
+    restart: always
+    image: wordpress:latest
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    volumes:
+      - ./wordpress/theme:/var/www/html/wp-content/themes/fabioschicken
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: mysql:3306
+      WORDPRESS_DB_PASSWORD: wordpress
+
+  nginx:
+    restart: always
+    image: nginx
+    links:
+      - reactapp:reactapp
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+
+  reactapp:
+    build: ./reactapp
+    volumes:
+      - ./reactapp:/src
+      - /src/node_modules

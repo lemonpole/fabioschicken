@@ -1,5 +1,12 @@
-# ignore vagrant setup files and misc.
-.vagrant/
+# mac
+.DS_Store
+**/.DS_Store
+
+# misc
 Thumbs.db
 *.log
 *.swp
+
+# ignore consistency data but keep tracking the directory
+mysql/data/*
+!mysql/data/.gitkeep
