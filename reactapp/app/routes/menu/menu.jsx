@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Tabs, Tab } from 'material-ui/Tabs';
+import AppetizersDrinksContainer from '../../components/appetizersdrinks-container';
 import DailyMenuContainer from '../../components/daily-menu-container';
 import GeneralMenuContainer from '../../components/general-menu-container';
 import styles from './menu.scss';
@@ -28,7 +29,7 @@ class Menu extends Component {
         content = ( <DailyMenuContainer children={data[ category ].children} /> );
         break;
       case 'Appetizers/Drinks':
-        content = ( <div>I AM THE APPETIZERS</div> );
+        content = ( <AppetizersDrinksContainer children={data[ category ].children} /> );
         break;
       default:
         content = ( <GeneralMenuContainer children={data[ category ]} /> );

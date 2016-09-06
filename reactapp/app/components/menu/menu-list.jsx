@@ -29,7 +29,12 @@ class MenuList extends Component {
     const content = [];
 
     for( let i = 0; i < numrows; i++ ) {
-      content.push( <Row key={i}>{this.renderCols( numcols )}</Row> );
+      content.push(
+        <div key={i} style={{ marginBottom: '20px' }}>
+          {this.props.title && ( <h2 style={{ marginBottom: '10px' }}>{this.props.title}</h2> )}
+          <Row>{this.renderCols( numcols )}</Row>
+        </div>
+      );
     }
 
     return (
