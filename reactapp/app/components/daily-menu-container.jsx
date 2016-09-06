@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-flexbox-grid';
-import MenuItem from './MenuItem';
+import { MenuItem } from './menu';
 
 class DailyMenuContainer extends Component {
   renderMenuItems = ( items ) => (

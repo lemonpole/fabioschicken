@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Tabs, Tab } from 'material-ui/Tabs';
-import DailyMenuContainer from '../../components/DailyMenuContainer';
-import GeneralMenuContainer from '../../components/GeneralMenuContainer';
+import DailyMenuContainer from '../../components/daily-menu-container';
+import GeneralMenuContainer from '../../components/general-menu-container';
 import styles from './menu.scss';
 
 const tabStyles = {

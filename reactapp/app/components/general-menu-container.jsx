@@ -1,6 +1,5 @@
 import React from 'react';
-import MenuList from './MenuList';
-import MenuItem from './MenuItem';
+import { MenuList, MenuItem } from './menu';
 
 const GeneralMenuContainer = ( props ) => (
   <MenuList>
