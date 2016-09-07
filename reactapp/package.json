@@ -6,9 +6,10 @@
   "license": "UNLICENSED",
   "repository": "github:lemonpole/fabioschicken.git",
   "scripts": {
-    "start": "node ./server/server.js",
-    "build": "webpack --colors --config ./webpack/webpack-dev.js",
-    "lint": "eslint --ext .js,.jsx app"
+    "build": "cross-env NODE_ENV=production webpack -p --bail --progress --config ./webpack/webpack-prod.js",
+    "lint": "eslint --ext .js,.jsx app",
+    "production": "node ./server/server-prod.js",
+    "start": "node ./server/server.js"
   },
   "dependencies": {
     "babel-polyfill": "^6.9.1",
@@ -33,6 +34,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "chalk": "^1.1.3",
     "classnames": "^2.2.5",
+    "cross-env": "^2.0.1",
     "css-loader": "^0.23.1",
     "detect-port": "^1.0.0",
     "eslint": "^2.13.1",
@@ -44,6 +46,7 @@
     "eslint-plugin-react": "^5.2.2",
     "file-loader": "^0.9.0",
     "flexboxgrid": "^6.3.0",
+    "html-webpack-plugin": "^2.22.0",
     "minimist": "^1.2.0",
     "node-sass": "^3.8.0",
     "postcss-loader": "^0.9.1",
