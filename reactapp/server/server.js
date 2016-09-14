@@ -22,7 +22,8 @@ if(args.p) {
 
 app.use( webpackDevMiddleware( compiler, {
   noInfo    : true,
-  publicPath: config.output.publicPath
+  publicPath: config.output.publicPath,
+  stats     : 'errors-only'
 }));
 
 app.use( webpackHotMiddleware( compiler ) );
