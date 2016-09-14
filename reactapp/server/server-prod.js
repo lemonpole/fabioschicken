@@ -1,13 +1,13 @@
 "use strict";
-const os                    = require( 'os' );
-const chalk                 = require( 'chalk' );
-const detect                = require( 'detect-port' );
-const args                  = require( 'minimist' )( process.argv.slice( 2 ) );
-const path                  = require( 'path' );
-const express               = require( 'express' );
+const os = require( 'os' );
+const chalk = require( 'chalk' );
+const detect = require( 'detect-port' );
+const args = require( 'minimist' )( process.argv.slice( 2 ) );
+const path = require( 'path' );
+const express = require( 'express' );
 
-const app                   = express();
-const oneDay                = 24 * 60 * 60 * 1000;
+const app = express();
+const oneDay = 24 * 60 * 60 * 1000;
 
 // figure out what port we should run on. user could have provided an argument
 // TODO: proper validation like checking if in use or that it's actually numeric :)

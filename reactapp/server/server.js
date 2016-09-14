@@ -1,17 +1,17 @@
 "use strict";
-const os                    = require( 'os' );
-const chalk                 = require( 'chalk' );
-const detect                = require( 'detect-port' );
-const args                  = require( 'minimist' )( process.argv.slice( 2 ) );
-const path                  = require( 'path' );
-const express               = require( 'express' );
-const webpack               = require( 'webpack' );
-const webpackDevMiddleware  = require( 'webpack-dev-middleware' );
-const webpackHotMiddleware  = require( 'webpack-hot-middleware' );
+const os = require( 'os' );
+const chalk = require( 'chalk' );
+const detect = require( 'detect-port' );
+const args = require( 'minimist' )( process.argv.slice( 2 ) );
+const path = require( 'path' );
+const express = require( 'express' );
+const webpack = require( 'webpack' );
+const webpackDevMiddleware = require( 'webpack-dev-middleware' );
+const webpackHotMiddleware = require( 'webpack-hot-middleware' );
 
-const config    = require( path.join( __dirname, '../webpack/webpack-dev.js' ) );
-const app       = express();
-const compiler  = webpack( config );
+const config = require( path.join( __dirname, '../webpack/webpack-dev.js' ) );
+const app = express();
+const compiler = webpack( config );
 
 // figure out what port we should run on. user could have provided an argument
 // TODO: proper validation like checking if in use or that it's actually numeric :)
