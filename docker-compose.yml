@@ -7,10 +7,10 @@ services:
       - ./mysql/dumps:/docker-entrypoint-initdb.d
       - ./mysql/data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: wordpress
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 
   wordpress:
     restart: always
@@ -25,7 +25,7 @@ services:
       - "8080:80"
     environment:
       WORDPRESS_DB_HOST: mysql:3306
-      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
 
   nginx:
     restart: always
@@ -33,7 +33,7 @@ services:
     links:
       - reactapp:reactapp
     ports:
-      - "80:80"
+      - "${NGINX_PORT}:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
 
@@ -42,3 +42,5 @@ services:
     volumes:
       - ./reactapp:/src
       - /src/node_modules
+    environment:
+      DEFAULT_PORT: ${REACTAPP_PORT}
