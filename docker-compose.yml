@@ -4,7 +4,6 @@ services:
     restart: always
     image: mysql:5.7
     volumes:
-      - ./mysql/dumps:/docker-entrypoint-initdb.d
       - ./mysql/data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
