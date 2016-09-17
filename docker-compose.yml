@@ -20,8 +20,6 @@ services:
       - mysql
     volumes:
       - ./wordpress/theme:/var/www/html/wp-content/themes/fabioschicken
-    ports:
-      - "8080:80"
     environment:
       WORDPRESS_DB_HOST: mysql:3306
       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
@@ -30,7 +28,8 @@ services:
     restart: always
     image: nginx
     links:
-      - reactapp:reactapp
+      - reactapp
+      - wordpress
     ports:
       - "${NGINX_PORT}:80"
     volumes:

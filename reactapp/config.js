@@ -1,1 +1,1 @@
-export const API_HOST = 'http://localhost:8080/wp-admin/admin-ajax.php?action';
+export const API_HOST = 'http://api.fabioschicken.com/wp-admin/admin-ajax.php?action';

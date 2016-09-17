@@ -3,3 +3,7 @@ services:
   mysql:
     volumes:
       - ./mysql/dumps:/docker-entrypoint-initdb.d
+
+  wordpress:
+    ports:
+      - "8080:80"
