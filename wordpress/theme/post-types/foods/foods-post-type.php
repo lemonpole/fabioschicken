@@ -3,9 +3,20 @@ namespace FC16\PostTypes;
 
 class Foods {
   const NAME              = 'fc16_foods';
-  const METABOX_ID        = self::NAME . '_mb';
-  const METABOX_NONCE     = self::METABOX_ID . '_nonce';
-  const META_DESCR        = self::NAME . '_descr';
+  const METABOXES         = array(
+    'descr' => array(
+      'id'    => self::NAME . '_descr_mb',
+      'nonce' => self::NAME . '_descr_mb_nonce',
+      'name'  => self::NAME . '_descr',
+      'label' => 'Description'
+    ),
+    'price' => array(
+      'id'    => self::NAME . '_price_mb',
+      'nonce' => self::NAME . '_price_mb_nonce',
+      'name'  => self::NAME . '_price',
+      'label' => 'Price'
+    )
+  );
   const DEFAULT_SETTINGS  = array(
     'labels' => array(
       'name'          => ( 'Foods' ),
@@ -16,7 +27,7 @@ class Foods {
     'supports'  => array(
       'title'
     ),
-    'register_meta_box_cb' => array( __CLASS__, 'register_meta_box' ),
+    'register_meta_box_cb' => array( __CLASS__, 'register_meta_boxes' ),
     'taxonomies' => array(
       'category'
     )
@@ -44,27 +55,60 @@ class Foods {
     register_post_type( self::NAME, self::DEFAULT_SETTINGS );
   }
 
-  public static function register_meta_box() {
-    add_meta_box( self::METABOX_ID, ( 'Description' ), array( __CLASS__, 'render_meta_box' ), self::NAME, 'normal' );
+  public static function register_meta_boxes() {
+    add_meta_box(
+      self::METABOXES[ 'price' ][ 'id' ],
+      self::METABOXES[ 'price' ][ 'label' ],
+      array( __CLASS__, 'render_price_meta_box' ),
+      self::NAME,
+      'normal'
+    );
+
+    add_meta_box(
+      self::METABOXES[ 'descr' ][ 'id' ],
+      self::METABOXES[ 'descr' ][ 'label' ],
+      array( __CLASS__, 'render_descr_meta_box' ),
+      self::NAME,
+      'normal'
+    );
   }
 
-  public static function render_meta_box( $post ) {
+  public static function render_price_meta_box( $post ) {
+    // fetch price value if it exists to preload into the textbox
+    $price = get_post_meta( $post->ID, self::METABOXES[ 'price' ][ 'name' ], true );
+    $price = ( empty( $price ) ? '0.00' : $price );
+
     // add nonce field so we can check for it later
-    wp_nonce_field( self::METABOX_ID, self::METABOX_NONCE );
+    wp_nonce_field( self::METABOXES[ 'price' ][ 'id' ], self::METABOXES[ 'price' ][ 'nonce' ] );
+
+    // render the html for the textbox
+    echo '<label class="screen-reader-text" for="'
+      . self::METABOXES[ 'price' ][ 'id' ]
+      . '">Deck</label>';
+    echo '<input type="number" step="0.01" min="0" class="widefat"'
+      . ' id="' . self::METABOXES[ 'price' ][ 'id' ]
+      . '" name="' . self::METABOXES[ 'price' ][ 'name' ]
+      . '" value="' . $price
+      . '"  />';
+  }
+
+  public static function render_descr_meta_box( $post ) {
+    // add nonce field so we can check for it later
+    wp_nonce_field( self::METABOXES[ 'descr' ][ 'id' ], self::METABOXES[ 'descr' ][ 'nonce' ] );
 
     // load any existing values from db and render editor
-    wp_editor( $post->post_content, self::META_DESCR, array(
+    wp_editor( $post->post_content, self::METABOXES[ 'descr' ][ 'name' ], array(
       'media_buttons' => false,
       'teeny'         => true,
-      'textarea_name' => self::META_DESCR
+      'textarea_name' => self::METABOXES[ 'descr' ][ 'name' ]
     ));
   }
 
   public static function save_post( $post_id, $post, $update ) {
     // some sanity checks first
     if( self::NAME != $post->post_type
-      || !isset( $_POST[ self::METABOX_NONCE ] )
-      || !wp_verify_nonce( $_POST[ self::METABOX_NONCE ], self::METABOX_ID )
+      || !isset( $_POST[ self::METABOXES[ 'descr' ][ 'nonce' ] ] )
+      || !wp_verify_nonce( $_POST[ self::METABOXES[ 'descr' ][ 'nonce' ] ], self::METABOXES[ 'descr' ][ 'id' ] )
       || defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE
     ) {
       return;
@@ -74,10 +118,15 @@ class Foods {
     remove_action( 'save_post', array( __CLASS__, 'save_post' ) );
 
     // okay we got this far. safe to modify the data now!
-    // updating the post calls save_post again which is why we disabled it above
-    $data = sanitize_text_field( $_POST[ self::META_DESCR ] );
-    $post->post_content = $data;
+    // sanitize description field
+    $descr = sanitize_text_field( $_POST[ self::METABOXES[ 'descr' ][ 'name' ] ] );
+    $post->post_content = $descr;
 
+    // sanitize price field. it must be in the format of a price.
+    $price = sanitize_text_field( $_POST[ self::METABOXES[ 'price' ][ 'name' ] ] );
+    update_post_meta( $post_id, self::METABOXES[ 'price' ][ 'name' ], $price );
+
+    // updating the post calls save_post again which is why we disabled it above
     wp_update_post( $post );
   }
 
