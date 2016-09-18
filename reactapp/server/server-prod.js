@@ -19,6 +19,11 @@ if(args.p) {
 // cache static assets for a day
 // serve the index.html on route requests
 app.use( express.static(
+  path.join( __dirname, '../dist' ),
+  { maxAge: oneDay }
+));
+
+app.use( express.static(
   path.join( __dirname, '../dist/assets' ),
   { maxAge: oneDay }
 ));
