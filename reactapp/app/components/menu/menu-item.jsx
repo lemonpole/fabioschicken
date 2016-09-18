@@ -16,7 +16,7 @@ const MenuItem = ( props ) => (
       <p style={{ marginTop: '5px' }}>{props.post_content}</p>
     </Col>
     <Col xs={3} md={2}>
-      <code>$13.37</code>
+      <code>{props.price}</code>
     </Col>
   </Row>
 );

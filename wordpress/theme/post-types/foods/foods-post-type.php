@@ -75,6 +75,7 @@ class Foods {
 
   public static function render_price_meta_box( $post ) {
     // fetch price value if it exists to preload into the textbox
+    // if price is empty preload it with a default val
     $price = get_post_meta( $post->ID, self::METABOXES[ 'price' ][ 'name' ], true );
     $price = ( empty( $price ) ? '0.00' : $price );
 
@@ -85,11 +86,11 @@ class Foods {
     echo '<label class="screen-reader-text" for="'
       . self::METABOXES[ 'price' ][ 'id' ]
       . '">Deck</label>';
-    echo '<input type="number" step="0.01" min="0" class="widefat"'
-      . ' id="' . self::METABOXES[ 'price' ][ 'id' ]
+    echo '<input type="number" step="0.01" min="0" class="widefat'
+      . '" id="' . self::METABOXES[ 'price' ][ 'id' ]
       . '" name="' . self::METABOXES[ 'price' ][ 'name' ]
       . '" value="' . $price
-      . '"  />';
+      . '" />';
   }
 
   public static function render_descr_meta_box( $post ) {
@@ -141,6 +142,19 @@ class Foods {
     }
   }
 
+  private static function get_posts_with_metadata( $args ) {
+    // get the posts that match the required args
+    $posts = get_posts( $args );
+
+    // loop through each post and append the relevant meta data
+    foreach( $posts as $post ) {
+      $price = get_post_meta( $post->ID, self::METABOXES[ 'price' ][ 'name' ], true );
+      $post->price = $price;
+    }
+
+    return $posts;
+  }
+
   /*
   * wp-admin/admin-ajax.php?action=foods
   * Gets all foods custom post type and groups them by category
@@ -168,7 +182,7 @@ class Foods {
     $result = [];
     foreach( $categories as $category ) {
       if( sizeof( $category->children ) === 0 ) {
-        $result[ $category->name ] = get_posts( array(
+        $result[ $category->name ] = self::get_posts_with_metadata( array(
           'post_type'   => self::NAME,
           'category'    => $category->term_id,
           'numberposts' => 0
@@ -178,7 +192,7 @@ class Foods {
       }
 
       foreach( $category->children as $child_cat ) {
-        $result[ $category->name ][ 'children' ][ $child_cat->name ] = get_posts( array(
+        $result[ $category->name ][ 'children' ][ $child_cat->name ] = self::get_posts_with_metadata( array(
           'post_type'   => self::NAME,
           'category'    => $child_cat->term_id,
           'numberposts' => 0
