@@ -20,7 +20,10 @@ var vendors = [
 module.exports = {
   devtool: 'source-map',
   entry: {
-    app: [ path.join( __dirname, '../app' ) ],
+    app: [
+      'whatwg-fetch',
+      path.join( __dirname, '../app' )
+    ],
     vendors: vendors
   },
   output: {
