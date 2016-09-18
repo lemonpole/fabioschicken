@@ -7,21 +7,21 @@ class Foods {
   const METABOX_NONCE     = self::METABOX_ID . '_nonce';
   const META_DESCR        = self::NAME . '_descr';
   const DEFAULT_SETTINGS  = array(
-    'labels'                => array(
+    'labels' => array(
       'name'          => ( 'Foods' ),
       'singular_name' => ( 'Food Item' )
     ),
-    'public'                => true,
-    'menu_icon'             => 'dashicons-carrot',
-    'supports'              => array(
+    'public' => true,
+    'menu_icon' => 'dashicons-carrot',
+    'supports'  => array(
       'title'
     ),
-    'register_meta_box_cb'  => array( __CLASS__, 'register_meta_box' ),
-    'taxonomies'            => array(
+    'register_meta_box_cb' => array( __CLASS__, 'register_meta_box' ),
+    'taxonomies' => array(
       'category'
     )
   );
-  const INIT_CATEGORIES   = array(
+  const INIT_CATEGORIES = array(
     ( 'Food Platters' ),
     ( 'Popular Platters' ),
     ( 'Appetizers/Drinks' ),
