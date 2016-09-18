@@ -17,7 +17,6 @@ if(args.p) {
 }
 
 // cache static assets for a day
-// serve the index.html on route requests
 app.use( express.static(
   path.join( __dirname, '../dist' ),
   { maxAge: oneDay }
@@ -28,6 +27,7 @@ app.use( express.static(
   { maxAge: oneDay }
 ));
 
+// serve the index.html on route requests
 app.get( '*', ( req, res ) => {
   res.sendFile( path.join( __dirname, 'index.html' ) );
 });
