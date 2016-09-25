@@ -29,7 +29,7 @@ app.use( express.static(
 
 // serve the index.html on route requests
 app.get( '*', ( req, res ) => {
-  res.sendFile( path.join( __dirname, 'index.html' ) );
+  res.sendFile( path.join( __dirname, '../dist/index.html' ) );
 });
 
 // before running it let's make sure the port we're trying to use is available
