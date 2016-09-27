@@ -6,7 +6,7 @@ const AppetizersDrinksContainer = ( props ) => (
     {Object.keys( props.children ).map(
       ( category, i ) => (
         <MenuList title={category} key={i}>
-          {props.children[ category ].map(
+          {props.children[ category ].children.map(
             ( item, j ) => <MenuItem key={j} {...item} />
           )}
         </MenuList>

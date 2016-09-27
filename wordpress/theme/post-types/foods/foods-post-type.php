@@ -182,7 +182,7 @@ class Foods {
     $result = [];
     foreach( $categories as $category ) {
       if( sizeof( $category->children ) === 0 ) {
-        $result[ $category->name ] = self::get_posts_with_metadata( array(
+        $result[ $category->name ][ 'children' ] = self::get_posts_with_metadata( array(
           'post_type'   => self::NAME,
           'category'    => $category->term_id,
           'numberposts' => 0
@@ -191,12 +191,17 @@ class Foods {
         $result[ $category->name ][ 'children' ] = [];
       }
 
+      // add category description
+      $result[ $category->name ][ 'description' ] = $category->description;
+
       foreach( $category->children as $child_cat ) {
-        $result[ $category->name ][ 'children' ][ $child_cat->name ] = self::get_posts_with_metadata( array(
+        $result[ $category->name ][ 'children' ][ $child_cat->name ][ 'children' ] = self::get_posts_with_metadata( array(
           'post_type'   => self::NAME,
           'category'    => $child_cat->term_id,
           'numberposts' => 0
         ));
+
+        $result[ $category->name ][ 'children' ][ $child_cat->name ][ 'description' ] = $child_cat->description;
       }
     }
 

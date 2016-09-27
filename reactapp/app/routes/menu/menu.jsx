@@ -22,7 +22,13 @@ const tabStyles = {
 class Menu extends Component {
   renderTab = ( category, key ) => {
     const { data } = this.props.foods;
+    let description;
     let content;
+
+    // if we have a description, render it.
+    if( data[ category ].description.length > 0 ) {
+      description = ( <h3>{data[ category ].description}</h3> );
+    }
 
     switch( category ) {
       case 'Daily Specials':
@@ -32,11 +38,12 @@ class Menu extends Component {
         content = ( <AppetizersDrinksContainer children={data[ category ].children} /> );
         break;
       default:
-        content = ( <GeneralMenuContainer children={data[ category ]} /> );
+        content = ( <GeneralMenuContainer children={data[ category ].children} /> );
     }
 
     return (
       <Tab label={category} key={key}>
+        {description}
         {content}
       </Tab>
     );
