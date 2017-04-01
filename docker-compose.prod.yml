@@ -3,5 +3,8 @@ services:
   wordpress:
     image: larsson719/fabioschicken:wp-theme
 
+  nginx:
+    image: larsson719/fabioschicken:nginx
+
   reactapp:
     image: larsson719/fabioschicken:reactapp

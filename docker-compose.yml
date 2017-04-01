@@ -25,14 +25,11 @@ services:
 
   nginx:
     restart: always
-    image: nginx:alpine
     links:
       - reactapp
       - wordpress
     ports:
       - "${NGINX_PORT}:80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
 
   reactapp:
     environment:

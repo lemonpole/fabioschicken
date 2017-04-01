@@ -2,15 +2,23 @@ IMAGES=local
 UNTAGGED_IMAGES=docker images -a | grep "^<none>" | awk '{print $$3}'
 DANGLING_IMAGES=docker volume ls -qf dangling=true
 
+IMAGE_NGINX=fabioschicken_nginx
 IMAGE_WORDPRESS=fabioschicken_wordpress
 IMAGE_REACTAPP=fabioschicken_reactapp
+CONTAINER_NGINX=nginx
 CONTAINER_WORDPRESS=wordpress
 CONTAINER_REACTAPP=reactapp
+NGINX_PUBLISH_ADDR=larsson719/fabioschicken:nginx
 WORDPRESS_PUBLISH_ADDR=larsson719/fabioschicken:wp-theme
 REACTAPP_PUBLISH_ADDR=larsson719/fabioschicken:reactapp
 
 default: production
 install: production
+
+build-nginx:
+	@echo "Building docker image..."
+	@cd nginx && docker build -t ${IMAGE_NGINX} .
+	@echo "Done."
 
 build-wordpress:
 	@echo "Building docker image..."
@@ -22,12 +30,10 @@ build-reactapp:
 	@cd reactapp && docker build -t ${IMAGE_REACTAPP} .
 	@echo "Done."
 
-remove-reactapp:
-	@echo "Removing existing docker image..."
-	@docker rmi ${IMAGE_REACTAPP} && echo "Done."; \
-	if [ $$? -ne 0 ]; then \
-		echo "Could not remove docker image."; \
-	fi
+tag-nginx:
+	@echo "Tagging docker image..."
+	@docker tag ${IMAGE_NGINX} ${NGINX_PUBLISH_ADDR}
+	@echo "Done"
 
 tag-wordpress:
 	@echo "Tagging docker image..."
@@ -37,6 +43,11 @@ tag-wordpress:
 tag-reactapp:
 	@echo "Tagging docker image..."
 	@docker tag ${IMAGE_REACTAPP} ${REACTAPP_PUBLISH_ADDR}
+	@echo "Done"
+
+publish-nginx:
+	@echo "Publishing docker image..."
+	@docker push ${NGINX_PUBLISH_ADDR}
 	@echo "Done"
 
 publish-wordpress:

@@ -9,6 +9,11 @@ services:
     volumes:
       - ./wordpress/theme:/var/www/html/wp-content/themes/fabioschicken
 
+  nginx:
+    build: ./nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+
   reactapp:
     build: ./reactapp
     volumes:
