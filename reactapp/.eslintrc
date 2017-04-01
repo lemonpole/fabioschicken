@@ -7,6 +7,10 @@
     "browser": true,
     "node": true
   },
+  "globals": {
+    "API_HOST": true,
+    "ReactClass": true,
+  },
   "plugins": [
     "react",
     "babel"

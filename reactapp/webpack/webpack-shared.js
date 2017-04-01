@@ -1,3 +1,4 @@
+require('dotenv').config();
 var path = require( 'path' );
 
 exports.loaders = {
@@ -30,6 +31,10 @@ exports.loaders = {
       loader: 'url-loader?limit=100000'
     }
   }
+};
+
+exports.vars = {
+  API_HOST: JSON.stringify( process.env.API_HOST )
 };
 
 exports.resolve = {

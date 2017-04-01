@@ -33,4 +33,5 @@ services:
 
   reactapp:
     environment:
+      API_HOST: ${API_HOST}
       DEFAULT_PORT: ${REACTAPP_PORT}

@@ -31,6 +31,7 @@ module.exports = {
     emitWarning: true
   },
   plugins: [
+    new webpack.DefinePlugin( webpackConfig.vars ),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
