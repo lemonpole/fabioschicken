@@ -28,7 +28,7 @@ services:
 
   nginx:
     restart: always
-    image: nginx
+    image: nginx:alpine
     links:
       - reactapp
       - wordpress

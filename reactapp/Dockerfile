@@ -1,17 +1,14 @@
-# Set the base image to latest node (for now)
-FROM      node:6
+# Set the base image for node
+FROM mhart/alpine-node:6
 
-# Base image above for some reason sets log level too high
-# Let's reset it back to its default
-ENV       NPM_CONFIG_LOGLEVEL warn
+# Install any extra dependencies we may need since we're using a
+# a very bare-bones node install
+# RUN apk add --no-cache make g++ python git
 
-# Provides cached layer for node_modules
-COPY      package.json /src/package.json
-RUN       cd /src/ && npm install
+# Add the source files and compile the application
+WORKDIR /src/
+COPY . /src/
+RUN cd /src/ && npm install
 
-# Define working directory
-WORKDIR   /src
-ADD       . /src
-
-# Run app using nodemon
-CMD       [ "npm", "run", "production" ]
+# Run the application!
+CMD [ "npm", "run", "start:production" ]
