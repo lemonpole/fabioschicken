@@ -9,7 +9,7 @@ RUN apk add --no-cache make g++ python git
 # https://github.com/sass/node-sass/issues/1527#issuecomment-217070514
 WORKDIR /src/
 COPY . /src/
-RUN cd /src/ && npm rebuild node-sass && npm install
+RUN cd /src/ && npm rebuild node-sass && npm install && npm run production
 
 # Run the application!
-CMD [ "npm", "run", "production" ]
+CMD [ "npm", "run", "start:production" ]
