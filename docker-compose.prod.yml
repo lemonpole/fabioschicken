@@ -1,4 +1,7 @@
 version: '2'
 services:
+  wordpress:
+    image: larsson719/fabioschicken:wp-theme
+
   reactapp:
     image: larsson719/fabioschicken:reactapp

@@ -4,6 +4,11 @@ services:
     volumes:
       - ./mysql/dumps:/docker-entrypoint-initdb.d
 
+  wordpress:
+    build: ./wordpress
+    volumes:
+      - ./wordpress/theme:/var/www/html/wp-content/themes/fabioschicken
+
   reactapp:
     build: ./reactapp
     volumes:

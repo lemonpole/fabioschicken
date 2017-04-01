@@ -13,15 +13,12 @@ services:
 
   wordpress:
     restart: always
-    image: wordpress:latest
     depends_on:
       - mysql
     links:
       - mysql
     ports:
       - "8080:80"
-    volumes:
-      - ./wordpress/theme:/var/www/html/wp-content/themes/fabioschicken
     environment:
       WORDPRESS_DB_HOST: mysql:3306
       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}

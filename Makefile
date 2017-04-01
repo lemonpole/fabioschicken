@@ -1,12 +1,21 @@
 IMAGES=local
 UNTAGGED_IMAGES=docker images -a | grep "^<none>" | awk '{print $$3}'
 DANGLING_IMAGES=docker volume ls -qf dangling=true
+
+IMAGE_WORDPRESS=fabioschicken_wordpress
 IMAGE_REACTAPP=fabioschicken_reactapp
+CONTAINER_WORDPRESS=wordpress
 CONTAINER_REACTAPP=reactapp
+WORDPRESS_PUBLISH_ADDR=larsson719/fabioschicken:wp-theme
 REACTAPP_PUBLISH_ADDR=larsson719/fabioschicken:reactapp
 
 default: production
 install: production
+
+build-wordpress:
+	@echo "Building docker image..."
+	@cd wordpress && docker build -t ${IMAGE_WORDPRESS} .
+	@echo "Done."
 
 build-reactapp:
 	@echo "Building docker image..."
@@ -20,9 +29,19 @@ remove-reactapp:
 		echo "Could not remove docker image."; \
 	fi
 
+tag-wordpress:
+	@echo "Tagging docker image..."
+	@docker tag ${IMAGE_WORDPRESS} ${WORDPRESS_PUBLISH_ADDR}
+	@echo "Done"
+
 tag-reactapp:
 	@echo "Tagging docker image..."
 	@docker tag ${IMAGE_REACTAPP} ${REACTAPP_PUBLISH_ADDR}
+	@echo "Done"
+
+publish-wordpress:
+	@echo "Publishing docker image..."
+	@docker push ${WORDPRESS_PUBLISH_ADDR}
 	@echo "Done"
 
 publish-reactapp:
@@ -87,7 +106,7 @@ clean-images:
 clean: clean-volumes clean-images
 
 lint:
-	@echo "Running lint on node container..."
+	@echo "Running lint on reactapp container..."
 	@docker-compose exec reactapp npm run lint && echo "Done."; \
 	if [ $$? -ne 0 ]; then \
 		echo "Could not run lint on node container. Is it running?"; \
@@ -95,4 +114,4 @@ lint:
 	fi
 
 tail-log:
-	@docker-compose logs -f ${CONTAINER_REACTAPP}
+	@docker-compose logs -f ${CONTAINER}
