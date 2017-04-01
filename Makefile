@@ -1,34 +1,33 @@
-default: production
-
-IMAGE=fabioschicken_reactapp
 IMAGES=local
 UNTAGGED_IMAGES=docker images -a | grep "^<none>" | awk '{print $$3}'
 DANGLING_IMAGES=docker volume ls -qf dangling=true
-CONTAINER=reactapp
-DOCKERHUB_ADDR=larsson719/fabioschicken:reactapp
+IMAGE_REACTAPP=fabioschicken_reactapp
+CONTAINER_REACTAPP=reactapp
+REACTAPP_PUBLISH_ADDR=larsson719/fabioschicken:reactapp
 
+default: production
 install: production
 
 build-reactapp:
 	@echo "Building docker image..."
-	@cd reactapp && docker build -t ${IMAGE} .
+	@cd reactapp && docker build -t ${IMAGE_REACTAPP} .
 	@echo "Done."
 
 remove-reactapp:
 	@echo "Removing existing docker image..."
-	@docker rmi ${IMAGE} && echo "Done."; \
+	@docker rmi ${IMAGE_REACTAPP} && echo "Done."; \
 	if [ $$? -ne 0 ]; then \
 		echo "Could not remove docker image."; \
 	fi
 
 tag-reactapp:
 	@echo "Tagging docker image..."
-	@docker tag ${IMAGE} ${DOCKERHUB_ADDR}
+	@docker tag ${IMAGE_REACTAPP} ${REACTAPP_PUBLISH_ADDR}
 	@echo "Done"
 
 publish-reactapp:
 	@echo "Publishing docker image..."
-	@docker push ${DOCKERHUB_ADDR}
+	@docker push ${REACTAPP_PUBLISH_ADDR}
 	@echo "Done"
 
 production:
@@ -96,4 +95,4 @@ lint:
 	fi
 
 tail-log:
-	@docker-compose logs -f ${CONTAINER}
+	@docker-compose logs -f ${CONTAINER_REACTAPP}

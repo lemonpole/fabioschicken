@@ -11,4 +11,4 @@ COPY . /src/
 RUN cd /src/ && npm install
 
 # Run the application!
-CMD [ "npm", "run", "start:production" ]
+CMD [ "npm", "run", "production" ]

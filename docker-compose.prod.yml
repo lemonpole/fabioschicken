@@ -1,1 +1,4 @@
 version: '2'
+services:
+  reactapp:
+    image: larsson719/fabioschicken:reactapp

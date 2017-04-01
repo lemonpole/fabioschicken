@@ -38,9 +38,5 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
 
   reactapp:
-    build: ./reactapp
-    volumes:
-      - ./reactapp:/src
-      - /src/node_modules
     environment:
       DEFAULT_PORT: ${REACTAPP_PORT}
