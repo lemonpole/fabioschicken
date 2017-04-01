@@ -6,6 +6,7 @@
 Thumbs.db
 *.log
 *.swp
+.env
 
 # ignore consistency data but keep tracking the directory
 mysql/data/*
