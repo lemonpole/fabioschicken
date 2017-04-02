@@ -116,6 +116,10 @@ clean-images:
 
 clean: clean-volumes clean-images
 
+clean-mysqldata:
+	@echo "Removing mysqldata directory..."
+	@rm -rf mysql/data/* && echo "Done."
+
 lint:
 	@echo "Running lint on reactapp container..."
 	@docker-compose exec reactapp npm run lint && echo "Done."; \
