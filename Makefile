@@ -4,10 +4,12 @@ DANGLING_IMAGES=docker volume ls -qf dangling=true
 IMAGE_NGINX=fabioschicken_nginx
 IMAGE_WORDPRESS=fabioschicken_wordpress
 IMAGE_REACTAPP=fabioschicken_reactapp
+
 CONTAINER_MYSQL=fabioschicken_mysql_1
 CONTAINER_NGINX=nginx
 CONTAINER_WORDPRESS=wordpress
 CONTAINER_REACTAPP=reactapp
+
 NGINX_PUBLISH_ADDR=larsson719/fabioschicken:nginx
 WORDPRESS_PUBLISH_ADDR=larsson719/fabioschicken:wp-theme
 REACTAPP_PUBLISH_ADDR=larsson719/fabioschicken:reactapp
