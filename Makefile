@@ -1,4 +1,3 @@
-IMAGES=local
 UNTAGGED_IMAGES=docker images -a | grep "^<none>" | awk '{print $$3}'
 DANGLING_IMAGES=docker volume ls -qf dangling=true
 
@@ -87,7 +86,7 @@ restart-all: restart
 
 unbuild:
 	@echo "Stopping containers and removing images..."
-	@docker-compose down --rmi ${IMAGES} && echo "Done."; \
+	@docker-compose down --rmi local && echo "Done."; \
 	if [ $$? -ne 0 ]; then \
 		echo "Could not remove all images. Exiting..."; \
 		exit 1; \
