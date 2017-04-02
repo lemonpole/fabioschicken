@@ -5,6 +5,7 @@ DANGLING_IMAGES=docker volume ls -qf dangling=true
 IMAGE_NGINX=fabioschicken_nginx
 IMAGE_WORDPRESS=fabioschicken_wordpress
 IMAGE_REACTAPP=fabioschicken_reactapp
+CONTAINER_MYSQL=fabioschicken_mysql_1
 CONTAINER_NGINX=nginx
 CONTAINER_WORDPRESS=wordpress
 CONTAINER_REACTAPP=reactapp
@@ -119,6 +120,16 @@ clean: clean-volumes clean-images
 clean-mysqldata:
 	@echo "Removing mysqldata directory..."
 	@rm -rf mysql/data/* && echo "Done."
+
+import-mysqldata:
+	@echo "Importing mysqldata..."
+	@docker exec -i fabioschicken_mysql_1 mysql -u${MYSQL_USERNAME} \
+	-p${MYSQL_PASSWORD} ${MYSQL_DATABASE} < ${MYSQLDUMP_PATH} && echo "Done."
+
+export-mysqldata:
+	@echo "Exporting mysqldata..."
+	@docker-compose exec mysql mysqldump -u${MYSQL_USERNAME} \
+	-p${MYSQL_PASSWORD} ${MYSQL_DATABASE} > ${MYSQLDUMP_PATH} && echo "Done."
 
 lint:
 	@echo "Running lint on reactapp container..."

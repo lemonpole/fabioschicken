@@ -5,6 +5,7 @@ services:
     image: mysql:5.7
     volumes:
       - ./mysql/data:/var/lib/mysql
+      - ./mysql/dumps/fresh.sql:/docker-entrypoint-initdb.d/fresh.sql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
