@@ -1,6 +1,6 @@
+/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getQOD } from '../../../modules/quoteofday/actions';
 import styles from './dailyspecial.scss';
 
 class DailySpecial extends Component {

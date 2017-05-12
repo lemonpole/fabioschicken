@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { RECEIVE_QUOTES, REQUEST_QUOTES } from '../constants';
 
 const API_HOST = 'http://quotes.rest/qod.json';
