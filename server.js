@@ -1,4 +1,4 @@
-"use strict";
+/* eslint-disable no-console */
 const os                    = require( 'os' );
 const chalk                 = require( 'chalk' );
 const detect                = require( 'detect-port' );
@@ -16,14 +16,14 @@ const compiler  = webpack( config );
 // figure out what port we should run on. user could have provided an argument
 // TODO: proper validation like checking if in use or that it's actually numeric :)
 let DEFAULT_PORT = 3000;
-if(args.p) {
+if( args.p ) {
   DEFAULT_PORT = args.p;
 }
 
 app.use( webpackDevMiddleware( compiler, {
   noInfo    : true,
   publicPath: config.output.publicPath
-}));
+}) );
 
 app.use( webpackHotMiddleware( compiler ) );
 

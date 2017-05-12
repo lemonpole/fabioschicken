@@ -70,7 +70,7 @@
     "jsx-quotes": [ "error", "prefer-double" ],
     "consistent-return": 0,
     "key-spacing": 0,
-    "no-multi-spaces": 2,
+    "no-multi-spaces": 0,
     "indent": [
       "error",
       2,
