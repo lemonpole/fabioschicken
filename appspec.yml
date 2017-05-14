@@ -10,5 +10,4 @@ hooks:
       runas: ec2-user
   ApplicationStart:
     - location: ec2-scripts/application-start.sh
-      timeout:
-      runas:
+      runas: ec2-user
