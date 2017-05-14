@@ -1,44 +1,14 @@
 # http://docs.aws.amazon.com/codedeploy/latest/userguide/app-spec-ref.html
 version: 0.0
 os: linux
-# files:
-#   - source:
-#     destination:
-#   - source:
-#     destination:
-# hooks:
-  # ApplicationStop:
-  #   - location:
-  #     timeout:
-  #     runas:
-  #   - location:
-  #     timeout:
-  #     runas:
-  # BeforeInstall:
-  #   - location:
-  #     timeout:
-  #     runas:
-  #   - location:
-  #     timeout:
-  #     runas:
-  # AfterInstall:
-  #   - location:
-  #     timeout:
-  #     runas:
-  #   - location:
-  #     timeout:
-  #     runas:
-  # ApplicationStart:
-  #   - location:
-  #     timeout:
-  #     runas:
-  #   - location:
-  #     timeout:
-  #     runas:
-  # ValidateService:
-  #   - location:
-  #     timeout:
-  #     runas:
-  #   - location:
-  #     timeout:
-  #     runas:
+files:
+  - source: /
+    destination: /home/ec2-user/fabioschicken
+hooks:
+  ApplicationStop:
+    - location: /home/ec2-user/fabioschicken/scripts/application-stop.sh
+      runas: ec2-user
+  ApplicationStart:
+    - location: /home/ec2-user/fabioschicken/scripts/application-start.sh
+      timeout:
+      runas:
