@@ -6,9 +6,9 @@ files:
     destination: /home/ec2-user/fabioschicken
 hooks:
   ApplicationStop:
-    - location: /home/ec2-user/fabioschicken/scripts/application-stop.sh
+    - location: /home/ec2-user/fabioschicken/ec2-scripts/application-stop.sh
       runas: ec2-user
   ApplicationStart:
-    - location: /home/ec2-user/fabioschicken/scripts/application-start.sh
+    - location: /home/ec2-user/fabioschicken/ec2-scripts/application-start.sh
       timeout:
       runas:
