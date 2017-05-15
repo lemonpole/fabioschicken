@@ -78,19 +78,21 @@ Getting Started
 
 1.  SSH into the instance and mount the recently attached volume:
 
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ bash
 $ sudo mkdir /mnt/fabioschicken
 $ sudo mount /dev/sdf /mnt/fabioschicken
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ 
 
 1.  After attaching the volume docker must be restarted along with the
     amazon-ecs-agent
 
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ bash
 $ sudo service docker restart
 $ docker ps -a # get the container id
 $ docker restart <container_id>
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
  
 
