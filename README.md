@@ -16,8 +16,6 @@ Current deployment setup consists of:
 
 -   [Docker Hub](https://hub.docker.com/r/larsson719/fabioschicken/tags/)
 
- 
-
 ### EC2 Container Service
 
 Used to orchestrate the docker stack through [task
@@ -30,25 +28,17 @@ containers, and other settings defined through there. Albeit, manually.[^1][^2]
 
 [^2]: Can also use the awe-cli to create the task definitions
 
- 
-
 ### Amazon EBS Volume
 
 EBS Volume created to store and persist the database used by the mysql
-container. If (and when) clusters or instances or deleted we don’t want to lose
+container. If (and when) clusters or instances are deleted we don’t want to lose
 the data!
 
- 
-
-Note that the volume must be in the same location (us-east-1) as the instance.
-
- 
+Note that the volume must be in the same location (`us-east-1`) as the instance.
 
 ### CodeDeploy
 
 Description coming soon
-
- 
 
 ### Docker Hub
 
@@ -61,8 +51,6 @@ repository:
 
 -   nginx
 
- 
-
 Getting Started
 ---------------
 
@@ -71,8 +59,6 @@ Getting Started
 1.  Create a cluster using EC2 Container Service. (use `t2.micro` for free-tier)
 
 2.  Create a service and name it `fabioschicken`
-
- 
 
 ### Attach the EBS volume to the instance
 
@@ -83,8 +69,6 @@ $ sudo mkdir /mnt/fabioschicken
 $ sudo mount /dev/sdf /mnt/fabioschicken
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- 
-
 1.  After attaching the volume docker must be restarted along with the
     amazon-ecs-agent
 
@@ -93,8 +77,6 @@ $ sudo service docker restart
 $ docker ps -a # get the container id
 $ docker restart <container_id>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
- 
 
 ### Setup CodeDeploy on the instance
 
