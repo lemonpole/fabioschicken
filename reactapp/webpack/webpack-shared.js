@@ -34,7 +34,7 @@ exports.loaders = {
 };
 
 exports.vars = {
-  API_HOST: JSON.stringify( process.env.API_HOST )
+  API_HOST: JSON.stringify( process.env.API_HOST || 'http://api.fabioschicken.com/wp-admin/admin-ajax.php?action' )
 };
 
 exports.resolve = {
