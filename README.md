@@ -125,9 +125,14 @@ our deployment scripts make use of AWS cli commands for restarting services:
 
 -   <http://docs.aws.amazon.com/cli/latest/userguide/awscli-install-linux.html>
 
+After installing run `aws configure` and setup with Access and Secret Keys.
+
 ### Setup CodeDeploy
 
 Visit: <https://console.aws.amazon.com/codedeploy/>
+
+Note: CodeDeploy agent must also be installed on the instance:
+<http://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install.html>
 
 When setting up CodeDeploy for the first time make sure you select `Custom
 Deployment` from the list of options.
