@@ -99,7 +99,7 @@ $ sudo mkdir /mnt/fabioschicken
 $ sudo mount /dev/sdf /mnt/fabioschicken
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1.  After attaching the volume — docker must be restarted along with the
+1.  After attaching the volume — docker must be restarted along with the
     amazon-ecs-agent
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ bash
@@ -124,3 +124,25 @@ SSH into the instance and install the AWS cli on that box. The reason being —
 our deployment scripts make use of AWS cli commands for restarting services:
 
 -   <http://docs.aws.amazon.com/cli/latest/userguide/awscli-install-linux.html>
+
+### Setup CodeDeploy
+
+Visit: <https://console.aws.amazon.com/codedeploy/>
+
+When setting up CodeDeploy for the first time make sure you select `Custom
+Deployment` from the list of options.
+
+-   Application name: `fabioschicken`
+
+-   Deployment group name: `fabioschicken`
+
+-   Deployment type: `In-place deployment`
+
+For `Add Instances` setting select: `Auto Scaling group` and choose the instance
+created above.
+
+-   Load balance: `None`
+
+-   Deployment configuration: `One at a time`
+
+-   Service role: `Choose service role created above`
