@@ -26,7 +26,7 @@ containers, and other settings defined through there. Albeit, manually...
 
 -   *Note: Eventually want to use the using ecs-cli compose*
 
--   *Note: Can also use the awe-cli to create the task definitions*
+-   *Note: Can also use the aws-cli to create the task definitions*
 
 ### Amazon EBS Volume
 
@@ -99,7 +99,7 @@ $ sudo mkdir /mnt/fabioschicken
 $ sudo mount /dev/sdf /mnt/fabioschicken
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1.  After attaching the volume docker must be restarted along with the
+1.  After attaching the volume — docker must be restarted along with the
     amazon-ecs-agent
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ bash
@@ -108,6 +108,19 @@ $ docker ps -a # get the container id
 $ docker restart <container_id>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-### Setup CodeDeploy on the instance
+### Setup CodeDeploy Permissions
 
-Coming soon
+Setup permissions and roles before continuing:
+
+-   <http://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-provision-user.html>
+
+-   <http://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-create-service-role.html>
+
+-   <http://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-create-iam-instance-profile.html>
+
+### Install AWS CLI on the instance
+
+SSH into the instance and install the AWS cli on that box. The reason being —
+our deployment scripts make use of AWS cli commands for restarting services:
+
+-   <http://docs.aws.amazon.com/cli/latest/userguide/awscli-install-linux.html>
