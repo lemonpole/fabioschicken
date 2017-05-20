@@ -146,3 +146,24 @@ created above.
 -   Deployment configuration: `One at a time`
 
 -   Service role: `Choose service role created above`
+
+### Add CodeDeploy integration to Github
+
+-   Click repository settings: `Integration and Services`
+
+-   Add Service: `AWS CodeDeploy`
+
+-   Fill out fields to match the application and deployment name
+
+-   For AWS Access and Secret Key:
+
+    -   <https://console.aws.amazon.com/iam/>
+
+    -   Select a user that’s configured with CodeDeploy permissions
+
+    -   `Security Credentials`
+
+    -   `Create Access Key` — Make sure to save these keys because they are only
+        shown once! (Cannot go back to them again)
+
+-   `Add Service`
