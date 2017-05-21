@@ -172,3 +172,39 @@ created above.
         shown once! (Cannot go back to them again)
 
 -   `Add Service`
+
+Add Github AutoDeploy
+
+Finally, the last step involves adding one more github integration called
+`Github AutoDeploy`.  Follow the instructions (add a github auth token).
+
+After this is completed the last step is to attach the following custom policy
+to the user on aws console— either directly or through its own dedicated role:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "codedeploy:GetDeploymentConfig",
+      "Resource": "arn:aws:codedeploy:us-east-1:123ACCOUNTID:deploymentconfig:*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "codedeploy:RegisterApplicationRevision",
+      "Resource": "arn:aws:codedeploy:us-east-1:123ACCOUNTID:application:APPLICATION_NAME"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "codedeploy:GetApplicationRevision",
+      "Resource": "arn:aws:codedeploy:us-east-1:123ACCOUNTID:application:APPLICATION_NAME"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "codedeploy:CreateDeployment",
+      "Resource": "arn:aws:codedeploy:us-east-1:123ACCOUNTID:deploymentgroup:APPLICATION_NAME/DEPLOYMENT_GROUP"
+    }
+  ]
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
