@@ -11,7 +11,7 @@ const styles = {
 };
 
 class DailyMenuContainer extends Component {
-  renderMenuItems = ( items ) => (
+  renderMenuItems = items => (
     items.map( ( item, i ) => <MenuItem key={i} {...item} /> )
   )
 

@@ -4,12 +4,12 @@ const requestFoods = () => ({
   type: REQUEST_FOODS
 });
 
-const receiveFoods = ( foods ) => ({
+const receiveFoods = foods => ({
   type: RECEIVE_FOODS,
   foods
 });
 
-export const getFoods = () => async dispatch => {
+export const getFoods = () => async ( dispatch ) => {
   dispatch( requestFoods() );
 
   try {
@@ -18,6 +18,6 @@ export const getFoods = () => async dispatch => {
 
     dispatch( receiveFoods( res.data ) );
   } catch( e ) {
-    console.log( e.message );
+    console.log( e.message ); // eslint-disable-line
   }
 };

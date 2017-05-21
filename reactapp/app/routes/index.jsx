@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
@@ -6,7 +7,7 @@ import AppRoot from './app-root';
 import Home from './home';
 import Menu from './menu';
 
-const App = ( props ) => (
+const App = props => (
   <MuiThemeProvider>
     <AppRoot children={props.children} />
   </MuiThemeProvider>

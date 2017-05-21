@@ -4,12 +4,12 @@ const requestBloginfo = () => ({
   type: REQUEST_BLOGINFO
 });
 
-const receiveBloginfo = ( bloginfo ) => ({
+const receiveBloginfo = bloginfo => ({
   type: RECEIVE_BLOGINFO,
   bloginfo
 });
 
-export const getBloginfo = () => async dispatch => {
+export const getBloginfo = () => async ( dispatch ) => {
   dispatch( requestBloginfo() );
 
   try {
@@ -18,6 +18,6 @@ export const getBloginfo = () => async dispatch => {
 
     dispatch( receiveBloginfo( res.data ) );
   } catch( e ) {
-    console.log( e.message );
+    console.log( e.message ); // eslint-disable-line
   }
 };

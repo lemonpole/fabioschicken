@@ -36,7 +36,7 @@ class AppRoot extends Component {
           isToggled={this.state.navToggled}
           onClick={this.handleBurgerClick}
           containerStyle={{
-            position: 'absolute', top: 20, right: 20,
+            position: 'absolute', top: 20, right: 20, // eslint-disable-line
             zIndex: 10
           }}
           barStyle={{

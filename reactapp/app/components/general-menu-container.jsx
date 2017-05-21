@@ -1,7 +1,7 @@
 import React from 'react';
 import { MenuList, MenuItem } from './menu';
 
-const GeneralMenuContainer = ( props ) => (
+const GeneralMenuContainer = props => (
   <MenuList>
     {props.children.map(
       ( item, i ) => <MenuItem key={i} {...item} />

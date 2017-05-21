@@ -7,7 +7,7 @@ export default class FullScreenNav extends Component {
   }
 
   renderNavItems = () => (
-    React.Children.map( this.props.children, ( child ) => <li>{child}</li> )
+    React.Children.map( this.props.children, child => <li>{child}</li> )
   )
 
   render() {

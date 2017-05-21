@@ -1,7 +1,7 @@
 import React from 'react';
 import { MenuList, MenuItem } from './menu';
 
-const AppetizersDrinksContainer = ( props ) => (
+const AppetizersDrinksContainer = props => (
   <div>
     {Object.keys( props.children ).map(
       ( category, i ) => (

@@ -9,7 +9,7 @@ const styles = {
   }
 };
 
-const MenuItem = ( props ) => (
+const MenuItem = props => (
   <Row>
     <Col xs={9} md={10}>
       <span style={styles.lead}>{props.post_title}</span>

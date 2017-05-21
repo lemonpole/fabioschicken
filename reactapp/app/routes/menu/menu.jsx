@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Tabs, Tab } from 'material-ui/Tabs';
