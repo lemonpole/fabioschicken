@@ -1,5 +1,5 @@
 # Set the base image for node
-FROM mhart/alpine-node:6
+FROM node:6.10.3-alpine
 
 # Install any extra dependencies we may need since we're using a
 # a very bare-bones node install
