@@ -9,7 +9,8 @@ RUN apk add --no-cache make g++ python git
 # https://github.com/sass/node-sass/issues/1527#issuecomment-217070514
 WORKDIR /src/
 COPY . /src/
+COPY entrypoint.sh /root/entrypoint.sh
 RUN cd /src/ && npm rebuild node-sass && npm install && npm run production
 
 # Run the application!
-CMD [ "npm", "run", "start:production" ]
+CMD ["/root/entrypoint.sh"]
