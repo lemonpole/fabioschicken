@@ -80,8 +80,7 @@ down:
 
 restart:
 	@echo "Restarting containers...";
-	@docker-compose restart nginx && docker-compose restart reactapp \
-	&& docker-compose restart wordpress;
+	@docker-compose restart nginx reactapp wordpress;
 
 restart-all: restart
 	@docker-compose restart mysql
