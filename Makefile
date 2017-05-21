@@ -62,6 +62,11 @@ publish-reactapp:
 	@docker push ${REACTAPP_PUBLISH_ADDR}
 	@echo "Done"
 
+release-nginx: build-nginx tag-nginx publish-nginx
+release-wordpress: build-wordpress tag-wordpress publish-wordpress
+release-reactapp: build-reactapp tag-reactapp publish-reactapp
+release: release-nginx release-wordpress release-reactapp
+
 production:
 	@echo "Running production environment"
 	@docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
