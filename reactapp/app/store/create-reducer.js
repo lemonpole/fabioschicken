@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import bloginfo from '../modules/bloginfo/reducers';
-import foods from '../modules/foods/reducers';
+import bloginfo from '../modules/bloginfo/reducer';
+import foods from '../modules/foods/reducer';
 
 export default function createReducer() {
   return combineReducers({

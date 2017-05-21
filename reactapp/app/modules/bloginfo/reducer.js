@@ -1,18 +1,19 @@
-import * as actions from '../constants';
+// @flow
+import type { Action } from './actions';
 
-const initialState = {
+const initialState: BloginfoState = {
   isLoading: false,
   data: {}
 };
 
-const bloginfo = ( state = initialState, action ) => {
+const bloginfo = ( state: BloginfoState = initialState, action: Action ) => {
   switch( action.type ) {
-    case actions.REQUEST_BLOGINFO:
+    case 'REQUEST_BLOGINFO':
       return {
         ...state,
         isLoading: true
       };
-    case actions.RECEIVE_BLOGINFO:
+    case 'RECEIVE_BLOGINFO':
       return {
         ...state,
         isLoading: false,

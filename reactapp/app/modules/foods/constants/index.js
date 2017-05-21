@@ -1,2 +1,0 @@
-export const RECEIVE_FOODS = 'RECEIVE_FOODS';
-export const REQUEST_FOODS = 'REQUEST_FOODS';
