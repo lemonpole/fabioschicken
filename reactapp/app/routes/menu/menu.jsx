@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Tabs, Tab } from 'material-ui/Tabs';
-import AppetizersDrinksContainer from '../../components/appetizersdrinks-container';
-import DailyMenuContainer from '../../components/daily-menu-container';
-import GeneralMenuContainer from '../../components/general-menu-container';
+import AppetizersDrinksContainer from 'components/appetizersdrinks-container';
+import DailyMenuContainer from 'components/daily-menu-container';
+import GeneralMenuContainer from 'components/general-menu-container';
 import styles from './menu.scss';
 
 const tabStyles = {

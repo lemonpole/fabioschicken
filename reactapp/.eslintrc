@@ -125,5 +125,13 @@
       }
     ],
     "spaced-comment": 0
+  },
+
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./webpack/webpack-dev.js"
+      }
+    }
   }
 }

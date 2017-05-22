@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { getBloginfo } from '../modules/bloginfo/actions';
-import { getFoods } from '../modules/foods/actions';
-import AnimatedBurgerIcon from '../components/animated-burger-icon';
-import FullScreenNav from '../components/fullscreen-nav';
+
+import { getBloginfo } from 'modules/bloginfo/actions';
+import { getFoods } from 'modules/foods/actions';
+import AnimatedBurgerIcon from 'components/animated-burger-icon';
+import FullScreenNav from 'components/fullscreen-nav';
 
 class AppRoot extends Component {
   state = {
