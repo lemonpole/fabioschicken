@@ -1,12 +1,9 @@
-FROM node:7.10.0-alpine
-
-RUN apk add --no-cache make g++ python git
+FROM node:7.10.0
 
 COPY . /src/
 WORKDIR /src/
 
 RUN mv /src/entrypoint.sh /usr/local/bin/fabioschicken \
-    && npm rebuild node-sass \
     && npm install \
     && npm run production
 
