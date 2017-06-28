@@ -1,6 +1,13 @@
-FROM      larsson719/alpine-node-sass:latest
-WORKDIR   /src/
-COPY      . /src/
-COPY      entrypoint.sh /root/entrypoint.sh
-RUN       npm install && npm run production
-CMD       ["/root/entrypoint.sh"]
+FROM node:7.10.0-alpine
+
+RUN apk add --no-cache make g++ python git
+
+COPY . /src/
+WORKDIR /src/
+
+RUN mv /src/entrypoint.sh /usr/local/bin/fabioschicken \
+    && npm rebuild node-sass \
+    && npm install \
+    && npm run production
+
+CMD [ "/usr/local/bin/fabioschicken" ]

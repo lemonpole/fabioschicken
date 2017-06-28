@@ -1,4 +1,4 @@
-FROM nginx:1.13.0-alpine
+FROM nginx:1.13.1-alpine
 
 COPY nginx.conf proxy-common.conf /etc/nginx/
 
