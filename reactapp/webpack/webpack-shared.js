@@ -1,26 +1,47 @@
 require('dotenv').config({ silent: true });
 var path = require( 'path' );
 
+process.traceDeprecation = true
 exports.loaders = {
   js: {
     test: /\.jsx?$/,
     exclude: /node_modules/,
-    loader: 'babel'
+    loader: 'babel-loader'
   },
   styles: {
     flexboxgrid: {
       test: /\.css$/,
-      loader: 'style!css?modules',
-      include: /flexboxgrid/
+      include: /flexboxgrid/,
+      use: [
+        {
+          loader: 'style-loader'
+        },
+        {
+          loader: 'css-loader',
+          options: { modules: true }
+        }
+      ]
     },
     app: {
       test: /\.scss$/,
       include: path.join( __dirname, '../app' ),
-      loaders: [
-        'style',
-        'css?modules&localIdentName=[name]__[local]___[hash:base64:5]',
-        'postcss',
-        'sass'
+      use: [
+        {
+          loader: 'style-loader'
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            localIdentName: '[name]__[local]___[hash:base64:5]'
+          }
+        },
+        {
+          loader: 'postcss-loader'
+        },
+        {
+          loader: 'sass-loader'
+        }
       ]
     }
   },
@@ -28,7 +49,12 @@ exports.loaders = {
     other: {
       test: /\.(png|jpg|gif)$/,
       include: path.join( __dirname, '../app' ),
-      loader: 'url-loader?limit=100000'
+      use: [{
+        loader: 'url-loader',
+        options: {
+          limit: 100000
+        }
+      }]
     }
   }
 };
@@ -40,6 +66,6 @@ exports.vars = {
 };
 
 exports.resolve = {
-  root: [ path.resolve( './app' ) ],
-  extensions: [ '', '.js', '.jsx' ]
+  modules: [ path.resolve( './app' ) ],
+  extensions: [ '.js', '.jsx' ]
 };

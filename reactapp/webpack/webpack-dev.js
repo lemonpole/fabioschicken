@@ -15,24 +15,28 @@ module.exports = {
   },
   resolve: webpackConfig.resolve,
   module: {
-    preLoaders: [{
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: "eslint"
-    }],
-    loaders: [
+    rules: [
+      {
+        test: /\.jsx?$/,
+        enforce: 'pre',
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: {
+          emitWarning: true
+        }
+      },
       webpackConfig.loaders.js,
       webpackConfig.loaders.styles.flexboxgrid,
       webpackConfig.loaders.styles.app,
       webpackConfig.loaders.statics.other
     ]
   },
-  eslint: {
-    emitWarning: true
-  },
   plugins: [
-    new webpack.DefinePlugin( webpackConfig.vars ),
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.DefinePlugin({
+      API_HOST: JSON.stringify( process.env.API_HOST || ( process.env.PRODUCTION ?
+        '$API_HOST' : 'http://api.fabioschicken.com/wp-admin/admin-ajax.php?action'
+      ))
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ]
