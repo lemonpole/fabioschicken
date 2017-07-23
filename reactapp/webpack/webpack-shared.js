@@ -66,6 +66,9 @@ exports.vars = {
 };
 
 exports.resolve = {
-  modules: [ path.resolve( './app' ) ],
+  modules: [
+    path.resolve( './app' ),
+    path.resolve( './node_modules' )
+  ],
   extensions: [ '.js', '.jsx' ]
 };
