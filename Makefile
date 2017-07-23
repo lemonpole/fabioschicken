@@ -128,8 +128,11 @@ clean-mysqldata:
 
 import-mysqldata:
 	@echo "Importing mysqldata..."
-	@docker exec -i fabioschicken_mysql_1 mysql -u${MYSQL_USERNAME} \
-	-p${MYSQL_PASSWORD} ${MYSQL_DATABASE} < ${MYSQLDUMP_PATH} && echo "Done."
+	@docker exec -i fabioschicken_mysql_1 mysql \
+	-u$(or $(MYSQL_USERNAME), wordpress) \
+	-p$(or $(MYSQL_PASSWORD), wordpress) \
+	$(or $(MYSQL_DATABASE), wordpress) < $(or $(MYSQLDUMP_PATH), ./mysql/dumps/fresh.sql) \
+	&& echo "Done."
 
 export-mysqldata:
 	@echo "Exporting mysqldata..."

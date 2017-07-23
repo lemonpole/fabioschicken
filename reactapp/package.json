@@ -11,7 +11,7 @@
     "flow-typed": "flow-typed install",
     "production": "cross-env NODE_ENV=production webpack -p --bail --progress --config ./webpack/webpack-prod.js",
     "start": "node ./server/server.js",
-    "start:production": "npm run production && naught start --daemon-mode false --remove-old-ipc true --stdout - --stderr - server/server-prod.js"
+    "start:production": "naught start --daemon-mode false --remove-old-ipc true --stdout - --stderr - server/server-prod.js"
   },
   "dependencies": {
     "babel-polyfill": "6.22.0",

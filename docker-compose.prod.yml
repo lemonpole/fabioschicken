@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 services:
   wordpress:
     image: larsson719/fabioschicken:wp-theme
