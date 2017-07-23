@@ -1,8 +1,8 @@
 version: '2.1'
 services:
   mysql:
-    restart: always
     image: mysql:5.7
+    restart: always
     volumes:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/dumps/fresh.sql:/docker-entrypoint-initdb.d/fresh.sql
@@ -13,6 +13,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD:-wordpress}
 
   wordpress:
+    build: ./wordpress
     restart: always
     depends_on:
       - mysql
@@ -25,6 +26,7 @@ services:
       - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD:-wordpress}
 
   nginx:
+    build: ./nginx
     restart: always
     links:
       - reactapp
@@ -33,6 +35,8 @@ services:
       - '${NGINX_PORT:-80}:80'
 
   reactapp:
+    build: ./reactapp
+    restart: always
     environment:
       - API_HOST=${API_HOST:-http://api.fabioschicken.com/wp-admin/admin-ajax.php?action}
       - DEFAULT_PORT=${DEFAULT_PORT:-3000}

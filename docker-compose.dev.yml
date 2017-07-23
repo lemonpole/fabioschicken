@@ -1,17 +1,14 @@
 version: '2.1'
 services:
   wordpress:
-    build: ./wordpress
     volumes:
       - ./wordpress/theme:/var/www/html/wp-content/themes/fabioschicken
 
   nginx:
-    build: ./nginx
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
 
   reactapp:
-    build: ./reactapp
     volumes:
       - ./reactapp:/src
       - /src/node_modules

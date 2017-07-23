@@ -1,71 +1,16 @@
 UNTAGGED_IMAGES=docker images -a | grep "^<none>" | awk '{print $$3}'
 DANGLING_IMAGES=docker volume ls -qf dangling=true
-
-IMAGE_NGINX=fabioschicken_nginx
-IMAGE_WORDPRESS=fabioschicken_wordpress
-IMAGE_REACTAPP=fabioschicken_reactapp
-
-CONTAINER_MYSQL=fabioschicken_mysql_1
-CONTAINER_NGINX=nginx
-CONTAINER_WORDPRESS=wordpress
-CONTAINER_REACTAPP=reactapp
-
-NGINX_PUBLISH_ADDR=larsson719/fabioschicken:nginx
-WORDPRESS_PUBLISH_ADDR=larsson719/fabioschicken:wp-theme
-REACTAPP_PUBLISH_ADDR=larsson719/fabioschicken:reactapp
+REPO_BASEPATH=larson719/fabioschicken
 
 default: production
 install: production
 
-build-nginx:
-	@echo "Building docker image..."
-	@cd nginx && docker build -t ${IMAGE_NGINX} .
-	@echo "Done."
+build:
+	@docker build -t ${REPO_BASEPATH}:$(or $(TAG_NAME), reactapp) \
+	$(or $(TAG_NAME), reactapp)
 
-build-wordpress:
-	@echo "Building docker image..."
-	@cd wordpress && docker build -t ${IMAGE_WORDPRESS} .
-	@echo "Done."
-
-build-reactapp:
-	@echo "Building docker image..."
-	@cd reactapp && docker build -t ${IMAGE_REACTAPP} .
-	@echo "Done."
-
-tag-nginx:
-	@echo "Tagging docker image..."
-	@docker tag ${IMAGE_NGINX} ${NGINX_PUBLISH_ADDR}
-	@echo "Done"
-
-tag-wordpress:
-	@echo "Tagging docker image..."
-	@docker tag ${IMAGE_WORDPRESS} ${WORDPRESS_PUBLISH_ADDR}
-	@echo "Done"
-
-tag-reactapp:
-	@echo "Tagging docker image..."
-	@docker tag ${IMAGE_REACTAPP} ${REACTAPP_PUBLISH_ADDR}
-	@echo "Done"
-
-publish-nginx:
-	@echo "Publishing docker image..."
-	@docker push ${NGINX_PUBLISH_ADDR}
-	@echo "Done"
-
-publish-wordpress:
-	@echo "Publishing docker image..."
-	@docker push ${WORDPRESS_PUBLISH_ADDR}
-	@echo "Done"
-
-publish-reactapp:
-	@echo "Publishing docker image..."
-	@docker push ${REACTAPP_PUBLISH_ADDR}
-	@echo "Done"
-
-release-nginx: build-nginx tag-nginx publish-nginx
-release-wordpress: build-wordpress tag-wordpress publish-wordpress
-release-reactapp: build-reactapp tag-reactapp publish-reactapp
-release: release-nginx release-wordpress release-reactapp
+publish:
+	@docker push ${REPO_BASEPATH}:$(or $(TAG_NAME), reactapp)
 
 production:
 	@echo "Running production environment"
@@ -136,8 +81,11 @@ import-mysqldata:
 
 export-mysqldata:
 	@echo "Exporting mysqldata..."
-	@docker-compose exec mysql mysqldump -u${MYSQL_USERNAME} \
-	-p${MYSQL_PASSWORD} ${MYSQL_DATABASE} > ${MYSQLDUMP_PATH} && echo "Done."
+	@docker-compose exec mysql mysqldump \
+	-u$(or $(MYSQL_USERNAME), wordpress) \
+	-p$(or $(MYSQL_PASSWORD), wordpress) \
+	$(or $(MYSQL_DATABASE), wordpress) > $(or $(MYSQLDUMP_PATH), ./mysql/dumps/fresh.sql) \
+	&& echo "Done."
 
 lint:
 	@echo "Running lint on reactapp container..."
