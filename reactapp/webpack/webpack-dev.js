@@ -4,7 +4,6 @@ var webpackConfig = require( path.join( __dirname, './webpack-shared.js' ) );
 
 module.exports = {
   entry: [
-    'webpack-hot-middleware/client',
     path.join( __dirname, '../app' )
   ],
   output: {
@@ -37,7 +36,6 @@ module.exports = {
         '$API_HOST' : 'http://api.fabioschicken.com/wp-admin/admin-ajax.php?action'
       ))
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ]
 };

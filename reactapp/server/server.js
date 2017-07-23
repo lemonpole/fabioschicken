@@ -6,8 +6,6 @@ const args = require( 'minimist' )( process.argv.slice( 2 ) );
 const path = require( 'path' );
 const express = require( 'express' );
 const webpack = require( 'webpack' );
-const webpackDevMiddleware = require( 'webpack-dev-middleware' );
-const webpackHotMiddleware = require( 'webpack-hot-middleware' );
 
 const config = require( path.join( __dirname, '../webpack/webpack-dev.js' ) );
 const app = express();
@@ -19,14 +17,6 @@ let DEFAULT_PORT = process.env.DEFAULT_PORT || 3000;
 if(args.p) {
   DEFAULT_PORT = args.p;
 }
-
-app.use( webpackDevMiddleware( compiler, {
-  noInfo    : true,
-  publicPath: config.output.publicPath,
-  stats     : 'errors-only'
-}));
-
-app.use( webpackHotMiddleware( compiler ) );
 
 // serve the index.html on route requests
 app.get( '*', ( req, res ) => {
