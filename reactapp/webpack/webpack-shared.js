@@ -13,9 +13,7 @@ exports.loaders = {
       test: /\.css$/,
       include: /flexboxgrid/,
       use: [
-        {
-          loader: 'style-loader'
-        },
+        'style-loader',
         {
           loader: 'css-loader',
           options: { modules: true }
@@ -26,22 +24,22 @@ exports.loaders = {
       test: /\.scss$/,
       include: path.join( __dirname, '../app' ),
       use: [
-        {
-          loader: 'style-loader'
-        },
+        'style-loader',
         {
           loader: 'css-loader',
           options: {
             modules: true,
+            importLoaders: 1,
             localIdentName: '[name]__[local]___[hash:base64:5]'
           }
         },
         {
-          loader: 'postcss-loader'
+          loader: 'postcss-loader',
+          options: {
+            postcss: {}
+          }
         },
-        {
-          loader: 'sass-loader'
-        }
+        'sass-loader'
       ]
     }
   },
