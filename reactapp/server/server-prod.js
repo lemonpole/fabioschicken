@@ -11,8 +11,8 @@ const oneDay = 24 * 60 * 60 * 1000;
 
 // figure out what port we should run on. user could have provided an argument
 // TODO: proper validation like checking if in use or that it's actually numeric :)
-let { DEFAULT_PORT } = process.env;
-if(args.p) {
+let DEFAULT_PORT = process.env.DEFAULT_PORT || 3000;
+if( args.p ) {
   DEFAULT_PORT = args.p;
 }
 
