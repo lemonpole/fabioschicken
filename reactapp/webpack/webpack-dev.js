@@ -36,6 +36,6 @@ module.exports = {
         '$API_HOST' : 'http://api.fabioschicken.com/wp-admin/admin-ajax.php?action'
       ))
     }),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin()
   ]
 };
