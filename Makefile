@@ -1,6 +1,6 @@
 UNTAGGED_IMAGES=docker images -a | grep "^<none>" | awk '{print $$3}'
 DANGLING_IMAGES=docker volume ls -qf dangling=true
-REPO_BASEPATH=larson719/fabioschicken
+REPO_BASEPATH=larsson719/fabioschicken
 
 default: development
 install: development
