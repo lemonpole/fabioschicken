@@ -4,6 +4,7 @@ COPY . /src/
 WORKDIR /src/
 
 RUN mv /src/entrypoint.sh /usr/local/bin/fabioschicken \
+    && npm rebuild node-sass \
     && npm install \
     && npm run production
 
