@@ -14,9 +14,9 @@
     "start:production": "naught start --daemon-mode false --remove-old-ipc true --stdout - --stderr - server/server-prod.js"
   },
   "dependencies": {
-    "babel-polyfill": "6.23.0",
+    "babel-polyfill": "6.26.0",
     "classnames": "2.2.5",
-    "flexboxgrid": "6.3.0",
+    "flexboxgrid": "6.3.1",
     "material-ui": "0.15.3",
     "react": "15.1.0",
     "react-dom": "15.1.0",
@@ -25,7 +25,7 @@
     "react-router": "2.6.1",
     "react-tap-event-plugin": "1.0.0",
     "redux": "3.5.2",
-    "redux-thunk": "2.1.0",
+    "redux-thunk": "2.2.0",
     "whatwg-fetch": "1.0.0"
   },
   "devDependencies": {
@@ -65,5 +65,6 @@
     "url-loader": "0.5.9",
     "webpack": "3.5.5",
     "webpack-dev-middleware": "1.12.0"
-  }
+  },
+  "false": {}
 }
