@@ -7,7 +7,6 @@ const path = require( 'path' );
 const express = require( 'express' );
 const webpack = require( 'webpack' );
 const webpackDevMiddleware = require( 'webpack-dev-middleware' );
-const webpackHotMiddleware = require( 'webpack-hot-middleware' );
 
 const config = require( path.join( __dirname, '../webpack/webpack-dev.js' ) );
 const app = express();
@@ -15,18 +14,31 @@ const compiler = webpack( config );
 
 // figure out what port we should run on. user could have provided an argument
 // TODO: proper validation like checking if in use or that it's actually numeric :)
-let { DEFAULT_PORT } = process.env;
-if(args.p) {
+let DEFAULT_PORT = process.env.DEFAULT_PORT || 3000;
+if( args.p ) {
   DEFAULT_PORT = args.p;
 }
 
+// configure webpack
 app.use( webpackDevMiddleware( compiler, {
-  noInfo    : true,
+  quiet: false,
   publicPath: config.output.publicPath,
-  stats     : 'errors-only'
+  stats: {
+    colors: true,
+    hash: false,
+    version: false,
+    timings: true,
+    assets: false,
+    chunks: false,
+    modules: false,
+    reasons: false,
+    children: false,
+    source: false,
+    errors: true,
+    errorDetails: true,
+    warnings: true
+  }
 }));
-
-app.use( webpackHotMiddleware( compiler ) );
 
 // serve the index.html on route requests
 app.get( '*', ( req, res ) => {

@@ -1,9 +1,9 @@
 UNTAGGED_IMAGES=docker images -a | grep "^<none>" | awk '{print $$3}'
 DANGLING_IMAGES=docker volume ls -qf dangling=true
-REPO_BASEPATH=larson719/fabioschicken
+REPO_BASEPATH=larsson719/fabioschicken
 
-default: production
-install: production
+default: development
+install: development
 
 build:
 	@docker build -t ${REPO_BASEPATH}:$(or $(TAG_NAME), reactapp) \
@@ -12,13 +12,15 @@ build:
 publish:
 	@docker push ${REPO_BASEPATH}:$(or $(TAG_NAME), reactapp)
 
-production:
-	@echo "Running production environment"
-	@docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+create-env:
+	@if [ ! -f .env ]; then \
+		echo ".env file not found. Creating..."; \
+		cp .env.example .env && echo "Done"; \
+	fi
 
-development:
+development: create-env
 	@echo "Running development environment"
-	@docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+	@docker-compose up -d
 
 down:
 	@echo "Stopping containers..."
@@ -34,6 +36,8 @@ restart:
 
 restart-all: restart
 	@docker-compose restart mysql
+
+bounce: down default
 
 unbuild:
 	@echo "Stopping containers and removing images..."

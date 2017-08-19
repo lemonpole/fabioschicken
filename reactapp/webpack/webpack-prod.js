@@ -1,7 +1,6 @@
 var path = require( 'path' );
 var webpack = require( 'webpack' );
 var webpackConfig = require( './webpack-shared.js' );
-
 var HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 
 var vendors = [
@@ -43,17 +42,21 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin( Object.assign(
       {},
-      webpackConfig.vars,
-      { 'process.env': {
-        NODE_ENV: JSON.stringify( 'production' )
-      }}
-    )),
-    new webpack.optimize.CommonsChunkPlugin( 'vendors', 'vendors.js' ),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false
+      {
+        API_HOST: JSON.stringify( process.env.API_HOST || ( process.env.PRODUCTION ?
+          '$API_HOST' : 'http://api.fabioschicken.com/wp-admin/admin-ajax.php?action'
+        )),
+        'process.env': {
+          NODE_ENV: JSON.stringify( 'production' )
+        }
       }
+    )),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendors',
+      filename: 'vendors.js'
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true
     }),
     new HtmlWebpackPlugin({
       template: path.join( __dirname, '../server/index.template.html' ),

@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable import/prefer-default-export */
 export type Action =
   { type: 'REQUEST_BLOGINFO' }
 | { type: 'RECEIVE_BLOGINFO', bloginfo: Object };

@@ -1,26 +1,45 @@
 require('dotenv').config({ silent: true });
 var path = require( 'path' );
 
+process.traceDeprecation = true
 exports.loaders = {
   js: {
     test: /\.jsx?$/,
     exclude: /node_modules/,
-    loader: 'babel'
+    loader: 'babel-loader'
   },
   styles: {
     flexboxgrid: {
       test: /\.css$/,
-      loader: 'style!css?modules',
-      include: /flexboxgrid/
+      include: /flexboxgrid/,
+      use: [
+        'style-loader',
+        {
+          loader: 'css-loader',
+          options: { modules: true }
+        }
+      ]
     },
     app: {
       test: /\.scss$/,
       include: path.join( __dirname, '../app' ),
-      loaders: [
-        'style',
-        'css?modules&localIdentName=[name]__[local]___[hash:base64:5]',
-        'postcss',
-        'sass'
+      use: [
+        'style-loader',
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            importLoaders: 1,
+            localIdentName: '[name]__[local]___[hash:base64:5]'
+          }
+        },
+        {
+          loader: 'postcss-loader',
+          options: {
+            postcss: {}
+          }
+        },
+        'sass-loader'
       ]
     }
   },
@@ -28,18 +47,20 @@ exports.loaders = {
     other: {
       test: /\.(png|jpg|gif)$/,
       include: path.join( __dirname, '../app' ),
-      loader: 'url-loader?limit=100000'
+      use: [{
+        loader: 'url-loader',
+        options: {
+          limit: 100000
+        }
+      }]
     }
   }
 };
 
-exports.vars = {
-  API_HOST: JSON.stringify( process.env.API_HOST || ( process.env.PRODUCTION ?
-    '$API_HOST' : 'http://api.fabioschicken.com/wp-admin/admin-ajax.php?action'
-  ))
-};
-
 exports.resolve = {
-  root: [ path.resolve( './app' ) ],
-  extensions: [ '', '.js', '.jsx' ]
+  modules: [
+    path.resolve( './app' ),
+    path.resolve( './node_modules' )
+  ],
+  extensions: [ '.js', '.jsx' ]
 };
