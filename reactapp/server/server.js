@@ -21,9 +21,23 @@ if( args.p ) {
 
 // configure webpack
 app.use( webpackDevMiddleware( compiler, {
-  noInfo: true,
+  quiet: false,
   publicPath: config.output.publicPath,
-  stats: 'errors-only'
+  stats: {
+    colors: true,
+    hash: false,
+    version: false,
+    timings: true,
+    assets: false,
+    chunks: false,
+    modules: false,
+    reasons: false,
+    children: false,
+    source: false,
+    errors: true,
+    errorDetails: true,
+    warnings: true
+  }
 }));
 
 // serve the index.html on route requests
