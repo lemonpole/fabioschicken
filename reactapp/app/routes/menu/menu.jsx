@@ -1,11 +1,14 @@
 /* eslint-disable react/no-children-prop */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Tabs, Tab } from 'material-ui/Tabs';
+import { Tabs, Tab } from 'material-ui-scrollable-tabs/Tabs';
 import AppetizersDrinksContainer from 'components/appetizersdrinks-container';
 import DailyMenuContainer from 'components/daily-menu-container';
 import GeneralMenuContainer from 'components/general-menu-container';
 import styles from './menu.scss';
+
+// NOTE: material-ui-scrollable-tabs/Tabs is going to be merged into the material-ui
+// NOTE: library soon. maybe for v1.0 so keep a lookout for that
 
 const tabStyles = {
   tabItemContainer: {
@@ -53,6 +56,7 @@ class Menu extends Component {
   render() {
     const { foods } = this.props;
     const categories = Object.keys( foods.data );
+    const w = screen.width;
 
     return (
       <section className={styles.container}>
@@ -61,6 +65,7 @@ class Menu extends Component {
             tabItemContainerStyle={tabStyles.tabItemContainer}
             inkBarStyle={tabStyles.inkBar}
             contentContainerStyle={tabStyles.contentContainer}
+            tabType={w > 768 ? 'fixed' : 'scrollable'}
           >
             {categories.map( ( category, key ) => this.renderTab( category, key ) )}
           </Tabs>

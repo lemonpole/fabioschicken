@@ -5,6 +5,7 @@ var HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 
 var vendors = [
   'material-ui',
+  'material-ui-scrollable-tabs',
   'react',
   'react-dom',
   'react-flexbox-grid',
