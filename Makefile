@@ -1,5 +1,4 @@
 UNTAGGED_IMAGES=docker images -a | grep "^<none>" | awk '{print $$3}'
-DANGLING_IMAGES=docker volume ls -qf dangling=true
 REPO_BASEPATH=larsson719/fabioschicken
 
 default: development
@@ -23,53 +22,39 @@ development: create-env
 	@docker-compose up -d
 
 down:
-	@echo "Stopping containers..."
-	@docker-compose down && echo "Done."; \
-	if [ $$? -ne 0 ]; then \
-		echo "Could not stop containers. Exiting..."; \
-		exit 1; \
-	fi
-
-restart:
-	@echo "Restarting containers...";
-	@docker-compose restart nginx reactapp wordpress;
-
-restart-all: restart
-	@docker-compose restart mysql
-
-bounce: down default
+	@docker-compose down
 
 unbuild:
-	@echo "Stopping containers and removing images..."
-	@docker-compose down --rmi local && echo "Done."; \
-	if [ $$? -ne 0 ]; then \
-		echo "Could not remove all images. Exiting..."; \
-		exit 1; \
-	fi
+	@docker-compose down --rmi local
 
 rebuild: unbuild
 	@echo "Rebuilding docker images..."
-	@docker-compose build 2> /dev/null && echo "Done."; \
-	if [ $$? -ne 0 ]; then \
-		echo "Could not rebuild all images. Exiting..."; \
-		exit 1; \
-	fi
+	@docker-compose build
 
-clean-volumes:
-	@echo "Removing dangling volumes..."
-	@docker volume rm $$($(DANGLING_IMAGES)) && echo "Done."; \
-	if [ $$? -ne 0 ]; then \
-		echo "Could not find any dangling volumes. Skipping..."; \
-	fi
+down-unbuild: down unbuild
+down-rebuild: down rebuild
 
-clean-images:
+restart: restart
+	@docker-compose restart mysql
+
+restart-quick:
+	@docker-compose restart nginx reactapp wordpress;
+
+bounce: down development
+
+clean-untagged:
 	@echo "Removing untagged images..."
 	@docker rmi $$($(UNTAGGED_IMAGES)) && echo "Done."; \
 	if [ $$? -ne 0 ]; then \
-		echo "Could not find any untagged images. Skipping..."; \
+		echo "Some untagged images could not be deleted."; \
 	fi
 
-clean: clean-volumes clean-images
+clean-system:
+	@docker system prune -f && docker container prune -f
+	@docker image prune -f && docker volume prune -f
+
+
+clean: clean-untagged clean-system
 
 clean-mysqldata:
 	@echo "Removing mysqldata directory..."
