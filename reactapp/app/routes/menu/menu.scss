@@ -1,3 +1,5 @@
+$large-devices: "only screen and (min-width : 1200px)";
+
 .container {
   background-image: url( 'http://colourlovers.com.s3.amazonaws.com/images/patterns/582/582552.png?1250954754' );
   min-height: 100vh;
@@ -7,7 +9,10 @@
 .contentbox {
   background-color: #fff;
   padding: 10px;
-  width: 60%;
+
+  @media #{$large-devices} {
+    width: 60%;
+  }
 }
 
 h3 {
