@@ -2,9 +2,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Tabs, Tab } from 'material-ui-scrollable-tabs/Tabs';
-import AppetizersDrinksContainer from 'components/appetizersdrinks-container';
-import DailyMenuContainer from 'components/daily-menu-container';
-import GeneralMenuContainer from 'components/general-menu-container';
+
+import FoodMenuContainer from 'components/food-menu';
 import styles from './menu.scss';
 
 // NOTE: material-ui-scrollable-tabs/Tabs is going to be merged into the material-ui
@@ -36,13 +35,13 @@ class Menu extends Component {
 
     switch( category ) {
       case 'Daily Specials':
-        content = ( <DailyMenuContainer children={data[ category ].children} /> );
-        break;
-      case 'Appetizers/Drinks':
-        content = ( <AppetizersDrinksContainer children={data[ category ].children} /> );
+        content = ( <FoodMenuContainer
+          renderCategoriesAsCols
+          data={data[ category ].children}
+        /> );
         break;
       default:
-        content = ( <GeneralMenuContainer children={data[ category ].children} /> );
+        content = <FoodMenuContainer data={data[ category ].children} />;
     }
 
     return (
