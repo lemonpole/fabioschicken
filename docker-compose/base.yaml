@@ -34,4 +34,3 @@ services:
     environment:
       - API_HOST=${API_HOST:-http://api.fabioschicken.com/wp-admin/admin-ajax.php?action}
       - DEFAULT_PORT=${DEFAULT_PORT:-3000}
-      - PRODUCTION=true
