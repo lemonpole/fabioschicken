@@ -4,8 +4,7 @@ services:
     image: mysql:5.7
     restart: always
     volumes:
-      - ./mysql/data:/var/lib/mysql
-      - ./mysql/dumps/fresh.sql:/docker-entrypoint-initdb.d/fresh.sql
+      - ../mysql/data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-wordpress}
       - MYSQL_DATABASE=${MYSQL_DATABASE:-wordpress}
@@ -13,37 +12,25 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD:-wordpress}
 
   wordpress:
-    build: ./wordpress
     restart: always
     depends_on:
       - mysql
     links:
       - mysql
-    ports:
-      - '8080:80'
-    volumes:
-      - ./wordpress/theme:/var/www/html/wp-content/themes/fabioschicken
     environment:
       - WORDPRESS_DB_HOST=mysql:3306
       - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD:-wordpress}
 
   nginx:
-    build: ./nginx
     restart: always
     links:
       - reactapp
       - wordpress
     ports:
       - '${NGINX_PORT:-80}:80'
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
 
   reactapp:
-    build: ./reactapp
     restart: always
-    volumes:
-      - ./reactapp:/src
-      - /src/node_modules
     environment:
       - API_HOST=${API_HOST:-http://api.fabioschicken.com/wp-admin/admin-ajax.php?action}
       - DEFAULT_PORT=${DEFAULT_PORT:-3000}

@@ -1,6 +1,44 @@
 UNTAGGED_IMAGES=docker images -a | grep "^<none>" | awk '{print $$3}'
 REPO_BASEPATH=larsson719/fabioschicken
+DEV_COMPOSE=-f docker-compose/base.yaml -f docker-compose/dev.yaml
+PROD_COMPOSE=-f docker-compose/base.yaml -f docker-compose/prod.yaml
 
+##
+## Action commands
+##
+.PHONY: start
+start:
+	@docker-compose ${DEV_COMPOSE} up -d
+
+.PHONY: start-prod
+start-prod:
+	@docker-compose ${PROD_COMPOSE} up -d
+
+.PHONY: down
+down:
+	@docker-compose ${DEV_COMPOSE} down
+
+.PHONY: restart
+restart: restart
+	@docker-compose ${DEV_COMPOSE} restart mysql
+
+.PHONY: restart-quick
+restart-quick:
+	@docker-compose ${DEV_COMPOSE} restart nginx reactapp wordpress;
+
+.PHONY: bounce
+bounce: down start
+
+.PHONY: bounce-prod
+bounce-prod: down start-prod
+
+.PHONY: pull
+pull:
+	@docker-compose ${PROD_COMPOSE} pull
+
+##
+## BUILD AND PUBLISH COMMANDS
+##
 .PHONY: build
 build:
 	@docker build -t ${REPO_BASEPATH}:$(or $(TAG_NAME), reactapp) \
@@ -10,23 +48,13 @@ build:
 publish:
 	@docker push ${REPO_BASEPATH}:$(or $(TAG_NAME), reactapp)
 
-.PHONY: development
-development:
-	@echo "Running development environment"
-	@docker-compose up -d
-
-.PHONY: down
-down:
-	@docker-compose down
-
 .PHONY: unbuild
 unbuild:
-	@docker-compose down --rmi local
+	@docker-compose ${DEV_COMPOSE} down --rmi local
 
 .PHONY: rebuild
 rebuild: unbuild
-	@echo "Rebuilding docker images..."
-	@docker-compose build
+	@docker-compose ${DEV_COMPOSE} build
 
 .PHONY: down-unbuild
 down-unbuild: down unbuild
@@ -34,21 +62,12 @@ down-unbuild: down unbuild
 .PHONY: down-rebuild
 down-rebuild: down rebuild
 
-.PHONY: restart
-restart: restart
-	@docker-compose restart mysql
-
-.PHONY: restart-quick
-restart-quick:
-	@docker-compose restart nginx reactapp wordpress;
-
-.PHONY: bounce
-bounce: down development
-
+##
+## CLEAN AND MAINTENANCE COMMANDS
+##
 .PHONY: clean-untagged
 clean-untagged:
-	@echo "Removing untagged images..."
-	@docker rmi $$($(UNTAGGED_IMAGES)) && echo "Done.";
+	@docker rmi -f $$($(UNTAGGED_IMAGES)) &> /dev/null || true
 
 .PHONY: clean-system
 clean-system:
@@ -58,38 +77,38 @@ clean-system:
 .PHONY: clean
 clean: clean-untagged clean-system
 
+##
+## MYSQL COMMANDS
+##
 .PHONY: clean-mysqldata
 clean-mysqldata:
-	@echo "Removing mysqldata directory..."
-	@rm -rf mysql/data/* && echo "Done."
+	@rm -rf mysql/data/*
 
 .PHONY: import-mysqldata
 import-mysqldata:
-	@echo "Importing mysqldata..."
 	@docker exec -i fabioschicken_mysql_1 mysql \
 	-u$(or $(MYSQL_USERNAME), wordpress) \
 	-p$(or $(MYSQL_PASSWORD), wordpress) \
-	$(or $(MYSQL_DATABASE), wordpress) < $(or $(MYSQLDUMP_PATH), ./mysql/dumps/fresh.sql) \
-	&& echo "Done."
+	$(or $(MYSQL_DATABASE), wordpress) < $(or $(MYSQLDUMP_PATH), ./mysql/dumps/fresh.sql)
 
 .PHONY: export-mysqldata
 export-mysqldata:
-	@echo "Exporting mysqldata..."
-	@docker-compose exec mysql mysqldump \
+	@docker-compose ${DEV_COMPOSE} exec mysql mysqldump \
 	-u$(or $(MYSQL_USERNAME), wordpress) \
 	-p$(or $(MYSQL_PASSWORD), wordpress) \
-	$(or $(MYSQL_DATABASE), wordpress) > $(or $(MYSQLDUMP_PATH), ./mysql/dumps/fresh.sql) \
-	&& echo "Done."
+	$(or $(MYSQL_DATABASE), wordpress) > $(or $(MYSQLDUMP_PATH), ./mysql/dumps/fresh.sql)
 
+##
+## MISC COMMANDS
+##
 .PHONY: lint
 lint:
-	@echo "Running lint on reactapp container..."
-	@docker-compose exec reactapp npm run lint && echo "Done."; \
-	if [ $$? -ne 0 ]; then \
-		echo "Could not run lint on node container. Is it running?"; \
-		exit 1; \
-	fi
+	@docker-compose ${DEV_COMPOSE} exec reactapp npm run lint
 
 .PHONY: tail-log
 tail-log:
-	@docker-compose logs -f ${CONTAINER}
+	@docker-compose ${DEV_COMPOSE} logs -f ${CONTAINER}
+
+.PHONY: status
+status:
+	@docker-compose ${DEV_COMPOSE} ps
