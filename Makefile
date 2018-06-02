@@ -86,7 +86,7 @@ clean-mysqldata:
 
 .PHONY: import-mysqldata
 import-mysqldata:
-	@docker exec -i fabioschicken_mysql_1 mysql \
+	@docker exec -i docker-compose_mysql_1 mysql \
 	-u$(or $(MYSQL_USERNAME), wordpress) \
 	-p$(or $(MYSQL_PASSWORD), wordpress) \
 	$(or $(MYSQL_DATABASE), wordpress) < $(or $(MYSQLDUMP_PATH), ./mysql/dumps/fresh.sql)
