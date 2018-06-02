@@ -1,0 +1,23 @@
+version: '3'
+services:
+  mysql:
+    volumes:
+      - ../mysql/dumps/fresh.sql:/docker-entrypoint-initdb.d/fresh.sql
+
+  wordpress:
+    build: ../wordpress
+    ports:
+      - '8080:80'
+    volumes:
+      - ../wordpress/theme:/var/www/html/wp-content/themes/fabioschicken
+
+  nginx:
+    build: ../nginx
+    volumes:
+      - ../nginx/nginx.conf:/etc/nginx/nginx.conf
+
+  reactapp:
+    build: ../reactapp
+    volumes:
+      - ../reactapp:/src
+      - /src/node_modules
