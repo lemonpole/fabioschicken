@@ -8,3 +8,5 @@ services:
 
   reactapp:
     image: larsson719/fabioschicken:reactapp
+    environment:
+      - PRODUCTION=true
