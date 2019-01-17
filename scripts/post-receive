@@ -1,0 +1,4 @@
+#!/bin/sh
+
+git --work-tree=/opt/fabioschicken --git-dir=/opt/fabioschicken.git checkout -f
+(cd /opt/fabioschicken && make pull && make bounce-prod)
